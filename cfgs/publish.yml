@@ -1,0 +1,15 @@
+results_dir: "results"
+logs_dir: "logs"
+
+stdout: True
+timeout: 30
+trytimes: 15
+# stdout: False
+url: "http://epub.sipo.gov.cn/patentoutline.action"
+ip_url: 'http://api3.xiguadaili.com/ip/?tid=557432612903222&num=1000&delay=5&area=山东&category=2&sortby=time'
+
+# pklfile: 'C:\\Users\\qhykk\\Desktop\\spider\\companys_publish.pkl'
+# pklfile_1: 'C:\\Users\\qhykk\\Desktop\\spider\\companys_publish_1.pkl'
+pklfile: 'C:\\Users\\qhykk\\Desktop\\spider\\results\\publish\\companys_publish_2.pkl'
+# pklfile_3: 'C:\\Users\\qhykk\\Desktop\\spider\\companys_publish_3.pkl'
+# pklfile='C:\\Users\\qhykk\\Desktop\\companys_authorization.pkl'
