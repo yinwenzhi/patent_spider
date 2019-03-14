@@ -33,6 +33,8 @@ def initEnv(patent_class):
         cur_cfg['strSources'] = 'pip'
     elif patent_class == 'authorization':
         cur_cfg['strSources'] = 'pig'
+    else:
+        return
 
     logs_dir = os.path.join(cur_cfg['logs'], patent_class)
 

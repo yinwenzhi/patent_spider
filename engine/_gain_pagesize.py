@@ -41,14 +41,14 @@ class GainPageSize(SpiderEngine):
                         continue
                     i = random.randint(1, 3)
                     time.sleep(i)
-                    
+
                     try:
                         html = self.get_html(applicant=company, ip=ip, strSources=self.strSources)
                     except requests.exceptions.ProxyError as e:
-                        log.error(f"# {idx+1}-{flag+1}: {e}")
+                        log.error(f"# {idx+1}-{flag+1}: 连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败")
                         continue
                     except requests.exceptions.ReadTimeout as e:
-                        log.error(f"# {idx+1}-{flag+1}: {e}")
+                        log.error(f"# {idx+1}-{flag+1}: ReadTimeout({self.timeout})")
                         continue
 
                     html.encoding = 'utf-8'
@@ -81,9 +81,9 @@ class GainPageSize(SpiderEngine):
 
                     with open(self.pklfile, 'wb') as f:
                         pickle.dump(results, f)
-                    log.info(f"# 保存到文件")
+                    log.info(f"# {idx+1}-{flag+1}: 保存到文件")
                     t2 = time.time()
-                    log.info(f'耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                    log.info(f'# 耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                 else:
                     log.info(f'# {idx+1}-{flag+1}: {company} has successed\n')
                     idx += 1
