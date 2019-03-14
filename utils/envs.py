@@ -29,15 +29,17 @@ def initEnv(patent_class):
     cfgs_root = 'cfgs'
     cur_cfg = getConfig(cfgs_root, patent_class)
 
-    results_dir = os.path.join(cur_cfg['results_dir'], patent_class)
-    logs_dir = os.path.join(cur_cfg['logs_dir'], patent_class)
+    if patent_class == 'publish':
+        cur_cfg['strSources'] = 'pip'
+    elif patent_class == 'authorization':
+        cur_cfg['strSources'] = 'pig'
 
-    url = cur_cfg['url']
-    ip_url = cur_cfg['ip_url']
-    timeout = cur_cfg['timeout']
+    logs_dir = os.path.join(cur_cfg['logs'], patent_class)
+
+    results_dir = os.path.join(cur_cfg['results'], patent_class)
+    cur_cfg['results_dir'] = results_dir
+
     stdout_flag = cur_cfg['stdout']
-    pklfile = cur_cfg['pklfile']
-    trytimes = cur_cfg['trytimes']
     setLogging(logs_dir, stdout_flag)
 
     return cur_cfg

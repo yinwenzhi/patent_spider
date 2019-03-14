@@ -5,6 +5,8 @@ import time
 import sys
 import logging as log
 from .engine import SpiderEngine
+import random
+import requests
 
 class GainPageSize(SpiderEngine):
     def __init__(self, config):
@@ -12,7 +14,7 @@ class GainPageSize(SpiderEngine):
         # all in args
         self.pklfile = config['pklfile']
         self.trytimes = config['trytimes']
-
+        self.strSources = config['strSources']
         super(GainPageSize, self).__init__(config)
 
 
@@ -24,6 +26,7 @@ class GainPageSize(SpiderEngine):
         with open(self.pklfile, 'rb') as f:
             results = pickle.load(f)
             idx = 0
+            t1 = time.time()
             while idx < len(results):
                 result = results[idx]
                 company = result['company']
@@ -31,15 +34,17 @@ class GainPageSize(SpiderEngine):
                     try:
                         ip = next(ip_gene)
                         # print(ip)
-                        log.info(f"{idx+1}-{flag+1}: 提取IP成功")
+                        log.info(f"# {idx+1}-{flag+1}: 提取IP成功: {ip['http']}")
                     except:
-                        log.error(f"{idx+1}-{flag+1}: 提取IP失败")                        
+                        log.error(f"# {idx+1}-{flag+1}: 提取IP失败")                        
                         ip_gene = self.get_ip()
                         continue
+                    i = random.randint(1, 3)
+                    time.sleep(i)
                     try:
-                        html = self.get_html(ip)
-                    except:
-                        log.error(f"{idx+1}-{flag+1}: 网络连接超时")
+                        html = self.get_html(applicant=company, ip=ip, strSources=self.strSources)
+                    except requests.exceptions.ProxyError as e:
+                        log.error(f"# {idx+1}-{flag+1}: {e}")
                         continue
 
                     html.encoding = 'utf-8'
@@ -53,27 +58,30 @@ class GainPageSize(SpiderEngine):
                         result['page_size'] = page_size
                     except:
                         if soup.find("h1", class_="head_title") == None:
-                            log.error(f"{idx+1}-{flag+1}: 没有您要查询的结果")
+                            log.error(f"# {idx+1}-{flag+1}: 没有您要查询的结果")
                             flag+=1
                             if flag >= self.trytimes:
-                                spider_all+=1
-                                log.info(f'{idx+1}-{flag}: {company} failed\n')
+                                self.spider_all+=1
+                                log.info(f'# {idx+1}-{flag}: {company} failed\n')
                                 idx += 1
                                 flag = 0
                             continue
                         else:
-                            log.error(f"{idx+1}-{flag+1}: 被认为是机器人")  
+                            log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
                             continue
-                    log.info(f'{idx+1}-{flag+1}: {company} success\n')
+                    log.info(f'# {idx+1}-{flag+1}: {company} success\n')
                     idx += 1
                     flag = 0
                     self.spider_success+=1
-                    spider_all+=1
+                    self.spider_all+=1
+
                     with open(self.pklfile, 'wb') as f:
                         pickle.dump(results, f)
-                        log.info("保存到文件\n")
+                    log.info(f"# 保存到文件")
+                    t2 = time.time()
+                    log.info(f'耗时{t2-t1}seconds, 成功爬取了{eng.spider_success}/{eng.spider_all}家公司\n')
                 else:
-                    log.info(f'{idx+1}-{flag+1}: {company} has successed\n')
+                    log.info(f'# {idx+1}-{flag+1}: {company} has successed\n')
                     idx += 1
                     flag = 0
 

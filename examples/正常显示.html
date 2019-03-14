@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><script>window._ty_rum&&window._ty_rum.server||function(t){function r(){var t=K(et);return t||(t=tt(),Q(et,t)),t}function e(){var t=n(nt);return t||(t=tt(),a(nt,t)),t}function n(t){if("string"!=typeof t)return null;var r=B.cookie;if(!r)return null;var e=null,n=r.split(";");return F.each(n,function(r){var n=r.split("=");if(F.trim(n[0])===F.trim(t))return e=n[1],!0}),e}function a(t,r,e){var n=t+"="+r;if(e){var a=new Date;a.setTime(a.getTime()+1e3*e),n+=";expires="+a.toGMTString()}B.cookie=n}function i(t){switch(typeof t){case"object":if(!t)return"null";if(t instanceof Array){for(var r="[",e=0;e<t.length;e++)r+=(e>0?",":"")+i(t[e]);return r+"]"}if(t instanceof Date)return t.getTime().toString();var r="{",e=0;for(var n in t)if("function"!=typeof t[n]){var a=i(t[n]);r+=(e>0?",":"")+i(n)+":"+a,e++}return r+"}";case"string":return'"'+t.replace(/([\"\\])/g,"\\$1").replace(/\n/g,"\\n")+'"';case"number":return t.toString();case"boolean":return t?"true":"false";case"function":return i(t.toString());case"undefined":default:return'"undefined"'}}function o(t){return H?H(t):t}function s(){return Date.now?Date.now():(new Date).valueOf()}function u(t,r,e){function n(){var t=F.args.apply(this,arguments);return r(i,t,e)}var a,i=t[t.length-1];if("function"==typeof i){switch(i.length){case 0:a=function(){return n.apply(this,arguments)};break;case 1:a=function(t){return n.apply(this,arguments)};break;case 2:a=function(t,r){return n.apply(this,arguments)};break;case 3:a=function(t,r,e){return n.apply(this,arguments)};break;case 4:a=function(t,r,e,a){return n.apply(this,arguments)};break;case 5:a=function(t,r,e,a,i){return n.apply(this,arguments)};break;default:for(var o=[],s=0,u=i.length;s<u;s++)o.push("_"+s);a=eval("(function(){return function("+o.join(",")+"){var args = [].slice.call(arguments, 0);return r(i, args, e);};})();")}t[t.length-1]=a}return t}function c(t,r){return t&&r&&(t.moduleName=r),t}function f(t,r,e){return function(){try{O=r,e&&l(r),t.apply(this,arguments),e&&p()}catch(n){throw e&&p(),c(n,r)}}}function l(r){F.each(["setTimeout","setInterval"],function(e){F.wrap(!0,t,e,function(t){return function(){var e,n=F.args.apply(this,arguments),a=n[0];return"function"==typeof a&&(e=f(a,r,!0)),e&&(n[0]=e),t.apply?t.apply(this,n):Function.prototype.apply.apply(t,[t,n])}})})}function p(){F.each(["setTimeout","setInterval"],function(r){F.unwrap(t,r)})}function d(t){M&&F.wrap(!1,M.prototype,"addEventListener",function(r){return function(){var e,n=F.args.apply(this,arguments),a=n[1];return"function"==typeof a&&(e=f(a,t,!0)),e&&(n[1]=e),r.apply(this,n)}}),l(t)}function h(){M&&F.unwrap(M.prototype,"addEventListener"),p()}function m(t){return function(t,r){}}function y(){return st&&st.indexOf("1")>-1}function v(){var t=0;if(j.firstPaint)t=j.firstPaint;else if(ot){var r=ot.timing;t=r.domLoading,ot.getEntriesByName&&F.each(B.querySelectorAll("head>link, head>script"),function(e){var n;if("LINK"==e.tagName?n=e.href:"SCRIPT"==e.tagName&&(e.defer||(n=e.src)),n){var a=ot.getEntriesByName(n);if(1==a.length){var i=a[0].responseEnd+r.navigationStart;i>t&&(t=i)}}}),t-=r.navigationStart,j.firstPaint=Math.round(t)}return t}function g(){if(j.fs)return j.fs;j.firstPaint||v();var r=j.firstPaint,e=t.innerHeight;if(ot&&ot.getEntriesByName){var n=[];F.each(B.querySelectorAll("img"),function(t){"none"!=t.style.display&&""!=t.src&&t.offsetTop<=e&&n.push(t.src)}),F.each(n,function(t){var e=ot.getEntriesByName(t);if(e.length){var n=e[0].responseEnd;n>r&&(r=n)}})}return j.fs=Math.round(r),r}function _(){var t=ot.timing&&ot.timing.navigationStart||j.st,r=j.end_time-t;return j.dr=r,r}function S(){if(this.errors.length){var t=function(t){var r=[],e={};F.each(t,function(t){var r=N(t[1],t[2],t[3],t[6]);e[r]?e[r][4]+=1:e[r]=[t[1],t[2],t[3],"#"==t[4]?B.URL:t[4],1,t[5],t[6],t[7]]});for(var n in e)r.push(e[n]);return r}(this.errors),r=this;F.POST(F.mkurl(j.server.beacon,"err",{fu:U?U:U++,os:parseInt((s()-(z||j.st))/1e3)}),F.stringify({datas:t}),{},function(t,e){t||(r.errors=[])})}}function T(){ut.initend()}function w(){"complete"===B.readyState&&ut.initend()}function E(t){function r(){ut.send()}return!!j.load_time||(ut.initend(),j.load_time=s(),void(9===t?r():setTimeout(r,0)))}function b(){ct||E(9),F.bind(S,ut)(),ct=1}function x(){ut.touch||(ut.touch=s())}function k(t){if(t[6]){var r=t[4],e=t[5];if(e&&"string"==typeof e&&r){e=e.split(/\n/);var n=$.exec(e[0]);n||(n=$.exec(e[1])),n&&n[1]!=r&&(t[4]=n[1]||r,t[2]=n[2]||t[2],t[3]=n[3]||t[3])}}}function N(t,r,e,n){return String(t)+String(r)+String(e)+String(n)}function P(r){var e=arguments,n="unknown",a=[s()];if(0!=e.length){if("string"==typeof r){var i=e.length<4?e.length:4;a[1]=e[0],i>2&&(a[2]=e[2],a[3]=0,a[4]=e[1]),i>3&&e[3]&&(a[3]=e[3])}else if(r instanceof Event||t.ErrorEvent&&r instanceof ErrorEvent){if(a[1]=r.message||(r.error&&r.error.constructor.name)+(r.error&&r.error.message)||"",a[2]=r.lineno?r.lineno:0,a[3]=r.colno?r.colno:0,a[4]=r.filename||r.error&&r.error.fileName||r.target&&r.target.baseURI||"",!a[4]&&Y)return;a[4]==B.URL&&(a[4]="#"),r.error?(a[5]=r.error.stack,a[6]=r.error.moduleName):(a[5]=null,a[6]=null);var o=N(a[1],a[2],a[3],a[6]);if(a[7]=ft[o]?0:1,ft[o]=!0,a[1]===n&&a[4]===n)return;k(a)}ut.errors.push(a)}}function R(t){return function(){var r=arguments;if(!this._ty_wrap){var e=F.args.apply(this,r);this._ty_rum={method:e[0],url:e[1],start:s()}}try{return t.apply(this,r)}catch(n){return Function.prototype.apply.call(t,this,r)}}}function L(r){return"string"==typeof r?r.length:t.ArrayBuffer&&r instanceof ArrayBuffer?r.byteLength:t.Blob&&r instanceof Blob?r.size:r&&r.length?r.length:0}function I(r){return function(){function e(t){var r,e,n=f._ty_rum;if(n){if(4!==n.readyState&&(n.end=s()),n.s=f.status,""==f.responseType||"text"==f.responseType)n.res=L(f.responseText);else if(f.response)n.res=L(f.response);else try{n.res=L(f.responseText)}catch(i){n.res=0}if(n.readyState=f.readyState,n.cb_time=d=23,r=[n.method+" "+n.url,n.s>0?n.end-n.start:0,d,n.s,n.s>0?0:t,n.res,n.req],n.r&&(e=a(f),e&&(e=e.xData)&&(r.push(e.id),r.push(e.action),r.push(e.time&&e.time.duration),r.push(e.time&&e.time.qu))),j.aa.push(r),j.server.custom_urls&&j.server.custom_urls.length&&!ut.ct){if(!j.pattern){j.pattern=[];for(var o=0;o<j.server.custom_urls.length;o++)j.pattern.push(new RegExp(j.server.custom_urls[o]))}for(var o=0;o<j.pattern.length;o++)if(n.url.match(j.pattern[o])){ut.ct=n.end+d;break}}ut.sa(),f._ty_rum=null}}function n(){4==f.readyState&&e(0)}function a(r){var e;if(r.getResponseHeader){var n=F.parseJSON(r.getResponseHeader("X-Ultra-Data"));n&&n.r&&r._ty_rum&&n.r+""==r._ty_rum.r+""&&(e={name:r._ty_rum.url,xData:n},ot&&t._ty_rum.c_ra.push(e))}return e}function i(t){return function(){var r,e;4==f.readyState&&f._ty_rum&&(f._ty_rum.end=r=s(),f._ty_rum.readyState=4);try{O&&l(O),e=t.apply(this,arguments),O&&p()}catch(a){throw a=c(a,O),O&&p(),O=null,a}return 4==f.readyState&&(d=s()-r),n(),e}}function o(t){return function(){var r=f._ty_rum;return!r||("progress"==t||("abort"==t?e(905):"loadstart"==t?r.start=s():"error"==t?e(990):"timeout"==t&&e(903),!0))}}function u(t,r){r instanceof Array||(r=[r]);for(var e=0;e<r.length;e++){var n=r[e];F.sh(t,n,o(n),!1)}}if(!this._ty_wrap){this._ty_rum.start=s(),this._ty_rum.req=arguments[0]?L(arguments[0]):0;var f=this,d=0,h=F.wrap(!1,this,"onreadystatechange",i);h||F.sh(this,"readystatechange",n,!1),u(this,["error","progress","abort","load","loadstart","loadend","timeout"]),h||setTimeout(function(){F.wrap(!1,f,"onreadystatechange",i)},0)}var m=function(){function t(t){var r={},e=/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?/.exec(t);return e&&(r.protocol=e[1]?e[1]+":":"http:",r.hostname=e[3],r.port=e[4]||""),r}return function(r){var e=location;if(r=F.trim(r)){if(r=r.toLowerCase(),r.startsWith("//")&&(r=e.protocol+r),!r.startsWith("http"))return!0;var n=t(r),a=n.protocol===e.protocol&&n.hostname===e.hostname;return a&&(a=n.port===e.port||!e.port&&("http:"===e.protocol&&"80"===n.port||"https:"===e.protocol&&"443"===n.port)),a}return!1}}(),y=arguments;try{var v=j.server;v&&v.id&&this._ty_rum&&m(this._ty_rum.url)&&(this._ty_rum.r=(new Date).getTime()%1e8,this.setRequestHeader&&this.setRequestHeader("X-Ultra-Id",v.id+";r="+this._ty_rum.r))}catch(g){}try{return r.apply(this,y)}catch(_){return Function.prototype.apply.call(r,this,y)}}}function C(){var r="TINGYUN_DATA";if(j.agent)return j.agent;var e=n(r);if(e){try{e=e.replace(/^"/,"").replace(/"$/,""),e=j.agent=F.parseJSON(decodeURIComponent(e))}catch(i){}a(r,"",-1e3)}else e=t._ty_rum&&t._ty_rum.agent;return e}var O,q=t.XMLHttpRequest,B=document,D=Object.defineProperty,A=t.define,M=t.EventTarget,U=0,$=new RegExp("([a-z]+:/{2,3}.*):(\\d+):(\\d+)"),H=t.encodeURIComponent,z=null,F={wrap:function(t,r,e,n,a){try{var i=r[e]}catch(o){if(!t)return!1}if(!i&&!t)return!1;if(i&&i._ty_wrap)return!1;try{r[e]=n(i,a)}catch(o){return!1}return r[e]._ty_wrap=[i],!0},unwrap:function(t,r){try{var e=t[r]._ty_wrap;e&&(t[r]=e[0])}catch(n){}},each:function(t,r){if(t){var e;for(e=0;e<t.length&&(!t[e]||!r(t[e],e,t));e+=1);}},mkurl:function(t,n){var a=arguments,i=/^https/i.test(B.URL)?"https":"http";if(i=i+"://"+t+"/"+n+"?av=1.6.0&v=1.6.0&key="+o(j.server.key)+"&svre="+o(j.server.server_elapsed)+"&tsid="+o(j.server.id)+"&ref="+o(B.URL)+"&rand="+s()+"&pvid="+rt+"&did="+o(r())+"&sid="+o(e()),"pf"!==n&&j&&(j.agent=C(),j.agent&&j.agent.n&&(i+="&n="+o(j.agent.n))),a.length>2){var u=a[2];for(var c in u)i+="&"+c+"="+u[c]}return X.host&&(i+="&cshst="+o(X.host)),X.url&&(i+="&csurl="+o(X.url)),i},GET:function(t,r){function e(){r&&r.apply(this,arguments),n.parentNode&&n.parentNode.removeChild(n)}if(navigator&&navigator.sendBeacon&&V.test(t))return navigator.sendBeacon(t,null);var n=B.createElement("img");return n.setAttribute("src",t),n.setAttribute("style","display:none"),this.sh(n,"readystatechange",function(){"loaded"!=n.readyState&&4!=n.readyState||e("loaded")},!1),this.sh(n,"load",function(){return e("load"),!0},!1),this.sh(n,"error",function(){return e("error"),!0},!1),B.body.appendChild(n)},fpt:function(t,r,e){function n(t,r,e){var n=B.createElement(t);try{for(var a in r)n[a]=r[a]}catch(i){var o="<"+t;for(var a in r)o+=" "+a+'="'+r[a]+'"';o+=">",e||(o+="</"+t+">"),n=B.createElement(o)}return n}var a=n("div",{style:"display:none"},!1),i=n("iframe",{name:"_ty_rum_frm",width:0,height:0,style:"display:none"},!1),o=n("form",{style:"display:none",action:t,enctype:"application/x-www-form-urlencoded",method:"post",target:"_ty_rum_frm"},!1),s=n("input",{name:"data",type:"hidden"},!0);return s.value=r,o.appendChild(s),a.appendChild(i),a.appendChild(o),B.body.appendChild(a),o.submit(),i.onreadystatechange=function(){"complete"!==i.readyState&&4!==i.readyState||(e(null,i.innerHTML),B.body.removeChild(a))},!0},POST:function(r,e,n,a){if(this.ie)return this.fpt(r,e,a);if(navigator&&navigator.sendBeacon&&V.test(r)){var i=navigator.sendBeacon(r,e);return a(!i),i}var o;if(t.XDomainRequest)return o=new XDomainRequest,o.open("POST",r),o.onload=function(){a(null,o.responseText)},this.sh(o,"load",function(){a(null,o.responseText)},!1),this.sh(o,"error",function(){a("POST("+r+")error")},!1),this.wrap(!0,o,"onerror",function(t){return function(){return a&&a("post error",o.responseText),!0}}),o.send(e),!0;if(!q)return!1;o=new q,o.overrideMimeType&&o.overrideMimeType("text/html");try{o._ty_wrap=1}catch(s){}var u=0;o.onreadystatechange=function(){4==o.readyState&&200==o.status&&(0==u&&a(null,o.responseText),u++)},o.onerror&&this.wrap(!0,o,"onerror",function(t){return function(){return a("post error",o.responseText),"function"!=typeof t||t.apply(this,arguments)}});try{o.open("POST",r,!0)}catch(s){return this.fpt(r,e,a)}for(var c in n)o.setRequestHeader(c,n[c]);return o.send(e),!0},sh:function(t,r,e,n){return t.addEventListener?t.addEventListener(r,e,n):!!t.attachEvent&&t.attachEvent("on"+r,e)},args:function(){for(var t=[],r=0;r<arguments.length;r++)t.push(arguments[r]);return t},stringify:i,parseJSON:function(r){if(r&&"string"==typeof r){var e=t.JSON?t.JSON.parse:function(t){return new Function("return "+t)()};return e(r)}return null},trim:Z?function(t){return null==t?"":Z.call(t)}:function(t){return null==t?"":t.toString().replace(/^\s+/,"").replace(/\s+$/,"")},extend:function(t,r){if(t&&r)for(var e in r)r.hasOwnProperty(e)&&(t[e]=r[e]);return t},bind:function(t,r){return function(){return t.apply(r,arguments)}}},X={},j=t._ty_rum=t.TINGYUN=F.extend({st:s(),ra:[],c_ra:[],aa:[],snd_du:function(){return this.server.adu?1e3*this.server.adu:1e4},cc:function(){return this.server.ac?this.server.ac:10},config:function(t,r){var e;if("object"==typeof t)e=t;else{if("string"!=typeof t||void 0===r)throw new Error("illegal arguments");e={},e[t]=r}for(var n in e)X[n]=e[n];return this}},t._ty_rum||{});var ty_rum=j;ty_rum.server = ultraServerInfo();if(j.server&&!(j.server.sr&&Math.random()>=j.server.sr)){var G={fp_threshold:2e3,fs_threshold:4e3,dr_threshold:4e3},J=F.extend(G,j.server),W="ignore_err",Y=!(W in j.server)||j.server[W],Z=String.prototype.trim;String.prototype.startsWith||(String.prototype.startsWith=function(t,r){return r=r||0,this.indexOf(t,r)===r});var K,Q,V=/^http/i,tt=function(){function t(t){return t<0?NaN:t<=30?0|Math.random()*(1<<t):t<=53?(0|Math.random()*(1<<30))+(0|Math.random()*(1<<t-30))*(1<<30):NaN}function r(t,r){for(var e=t.toString(16),n=r-e.length,a="0";n>0;n>>>=1,a+=a)1&n&&(e=a+e);return e}return function(){return r(t(32),8)+"-"+r(t(16),4)+"-"+r(16384|t(12),4)+"-"+r(32768|t(14),4)+"-"+r(t(48),12)}}(),rt=tt(),et="TY_DISTINCT_ID",nt="TY_SESSION_ID",at=function(){try{return localStorage.setItem(rt,rt),localStorage.removeItem(rt),!0}catch(t){return!1}}();at?(K=F.bind(localStorage.getItem,localStorage),Q=F.bind(localStorage.setItem,localStorage)):(K=n,Q=a);try{D&&D(t,"define",{get:function(){return A},set:function(t){"function"==typeof t&&(t.amd||t.cmd)?(A=function(){var r=F.args.apply(this,arguments);if(3!==r.length)return t.apply(this,r);var e="string"==typeof r[0]?r[0]:"anonymous";return t.apply(this,u(r,function(t,r,e){var n;try{O=e,d(e),n=t.apply(this,r),h()}catch(a){throw h(),c(a,e)}return n},e))},F.extend(A,t)):A=t},configurable:!0})}catch(it){}var ot=t.performance?t.performance:t.Performance;ot&&(F.sh(ot,"resourcetimingbufferfull",function(){var t=ot.getEntriesByType("resource");t&&(j.ra=j.ra.concat(t),ot.clearResourceTimings())},!1),F.sh(ot,"webkitresourcetimingbufferfull",function(){var t=ot.getEntriesByType("resource");t&&(j.ra=j.ra.concat(t),ot.webkitClearResourceTimings())},!1));for(var st="",ut=j.metric={ready:function(){return j.load_time},initend:function(){function t(){ut.sa()}j.end_time||(j.end_time=s(),this._h=setInterval(t,2e3))},send:function(){function r(){function r(t){return n[t]>0?n[t]-a:0}var e={};if(ot&&ot.timing){var n=ot.timing;a=n.navigationStart;var i=r("domainLookupStart"),s=r("domainLookupEnd"),u=r("redirectStart"),c=r("redirectEnd"),f=r("connectStart"),l=r("connectEnd");e={f:r("fetchStart"),qs:r("requestStart"),rs:r("responseStart"),re:r("responseEnd"),os:r("domContentLoadedEventStart"),oe:r("domContentLoadedEventEnd"),oi:r("domInteractive"),oc:r("domComplete"),ls:r("loadEventStart"),le:r("loadEventEnd"),tus:r("unloadEventStart"),tue:r("unloadEventEnd"),ressize:!0},l-f>0&&(e.cs=f,e.ce=l),s-i>0&&(e.ds=i,e.de=s),(c-u>0||c>0)&&(e.es=u,e.ee=c),0==e.le&&(e.ue=j.load_time-a);var p;if(n.msFirstPaint)p=n.msFirstPaint;else if(t.chrome&&chrome.loadTimes){var d=chrome.loadTimes();d&&d.firstPaintTime&&(p=1e3*d.firstPaintTime)}else j.firstPaint&&(p=j.firstPaint);p&&(e.fp=Math.round(p-a),j.firstPaint=e.fp),n.secureConnectionStart&&(e.sl=r("secureConnectionStart"))}else e={t:a,os:j.end_time-a,ls:j.load_time-a,ressize:!1};e.je=ut.errors.length,ut.ct&&(e.ct=ut.ct-a),ut.touch&&(e.fi=ut.touch-a);var h=C();return h&&(e.id=o(h.id),e.a=h.a,e.q=h.q,e.tid=o(h.tid),e.n=o(h.n)),e.sh=t.screen&&t.screen.height,e.sw=t.screen&&t.screen.width,e}function e(r){var e=t._ty_rum.c_ra;if(r)for(var n=e.length-1;n>=0;n--)if(r.indexOf(e[n].name)>-1)return e[n].xData;return null}function n(t){function r(t){return p[t]>0?p[t]:0}var n="1",i="0";if(st+=v()>=J.fp_threshold?n:i,st+=g()>=J.fs_threshold?n:i,st+=_()>=J.dr_threshold?n:i,st+=t>=j.server.trace_threshold?n:i,!y())return null;var s=ot;if(s&&s.getEntriesByType){var u={tr:!0,tt:o(B.title),charset:B.characterSet},c=j.ra,f=s.getEntriesByType("resource");f&&(c=c.concat(f),s.clearResourceTimings?s.clearResourceTimings():s.webkitClearResourceTimings&&s.webkitClearResourceTimings()),u.res=[];for(var l=0;l<c.length;l++){var p=c[l],d={o:r("startTime"),rt:p.initiatorType,n:p.name,f:r("fetchStart"),ds:r("domainLookupStart"),de:r("domainLookupEnd"),cs:r("connectStart"),ce:r("connectEnd"),sl:r("secureConnectionStart"),qs:r("requestStart"),rs:r("responseStart"),re:r("responseEnd"),ts:p.transferSize||0,es:p.encodedBodySize||0},h=e(p.name);h&&(d.aid=h.id,d.atd=h.trId,d.srve=h.svre,d.an=h.action,d.aq=h.time&&h.time.qu,d.as=h.time&&h.time.duration),u.res.push(d)}if(ut.errors.length){u.err=[];for(var l=0,m=ut.errors,S=m.length;l<S;l++)u.err.push({o:Math.round(m[l][0]-a),e:m[l][1]&&m[l][1].replace(/([\"\\])/g,"\\$1").replace(/\n/g,"\\n"),l:m[l][2],c:m[l][3],r:m[l][4],ec:S,s:m[l][5],m:m[l][6],ep:m[l][7]})}return u}return null}if(this.sended)return!1;if(!this.ready())return!1;var a=j.st,i={};try{var u=r();i=n(u.ls>0?u.ls:j.load_time-a);var c={trflag:st||"0000",fp:j.firstPaint,fs:j.fs,dr:j.dr};F.extend(u,c)}catch(f){}i=i?F.stringify(i):"";var l=F.mkurl(j.server.beacon,"pf",u);z=s(),0!=i.length&&F.POST(l,i,{},m("POST"))||F.GET(l);var p=F.bind(S,this);return p(),setInterval(p,1e4),this.sended=!0,this.sa(1),!0},sa:function(t){(this.ready()||t)&&(t||(t=!this._last_send||s()-this._last_send>j.snd_du()||j.aa.length>=j.cc()),j.aa.length>0&&t&&(this._last_send=s(),F.POST(F.mkurl(j.server.beacon,"xhr"),F.stringify({xhr:j.aa}),{},m("POST")),j.aa=[]))},errors:[]},ct=null,ft={},lt=[["load",E],["beforeunload",b],["pagehide",b],["unload",b]],pt=0;pt<lt.length;pt++)F.sh(t,lt[pt][0],lt[pt][1],!1);t.addEventListener?F.sh(t,"error",P,!1):t.onerror=function(t,r,e,n,a){if(r||!Y){var i=[s(),t,e,n,r==B.URL?"#":r],o=N(t,e,n,a&&a.moduleName);i=i.concat([a&&a.stack,a&&a.moduleName,ft[o]?0:1]),ft[o]=!0,k(i),ut.errors.push(i)}};for(var dt=[["scroll",x],["keypress",x],["click",x],["DOMContentLoaded",T],["readystatechange",w]],pt=0;pt<dt.length;pt++)F.sh(B,dt[pt][0],dt[pt][1],!1);if(F.wrap(!1,t,"requestAnimationFrame",function(r){return function(){return j.firstPaint=s(),t.requestAnimationFrame=r,r.apply(this,arguments)}}),q)if(q.prototype)F.wrap(!1,q.prototype,"open",R),F.wrap(!1,q.prototype,"send",I);else{F.ie=7;var ht=q;t.XMLHttpRequest=function(){var t=new ht;return F.wrap(!1,t,"open",R),F.wrap(!1,t,"send",I),t}}else t.ActiveXObject&&(F.ie=6)}}(window); function ultraServerInfo(){return {'id':'epub011^1544692145498^150895890','ignore_err':false,'beacon':'36.110.100.186:51075/ultrabrowser','beacon_err':'36.110.100.186:51075/ultrabrowser','key':'epub11','trace_threshold':1,'fp_threshold':1,'fs_threshold':1,'dr_threshold':1,'custom_urls':[],'server_elapsed':28681,'sr':1.0};};</script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<title>专利查询结果展示-公布模式</title>
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/qrcode.js" type="text/javascript"></script>
+<script src="js/datecheck.js" type="text/javascript"></script>
+<script src="js/msearch.js" type="text/javascript"></script>
+<script src="js/psearch.js" type="text/javascript"></script>
+<script src="js/pam.js" type="text/javascript"></script>
+<script src="js/gb.js" type="text/javascript"></script>
+<script src="js/zytp.js" type="text/javascript"></script>
+<script src="js/mask.js" type="text/javascript"></script>
+<script type="text/javascript">
+function setup(pato) {
+        pato.showType.value = "1";
+        pato.strSources.value = "pip";
+        pato.strWhere.value = "PA='%百度时代网络技术（北京）有限公司%'";
+        pato.numSortMethod.value = "0";
+        pato.strLicenseCode.value = "";
+        pato.numIp.value = "0";
+        pato.numIpc.value = "";
+        pato.numIg.value = "0";
+        pato.numIgc.value = "";
+        pato.numIgd.value = "";
+        pato.numUg.value = "";
+        pato.numUgc.value = "";
+        pato.numUgd.value = "";
+        pato.numDg.value = "";
+        pato.numDgc.value = "";
+        pato.pageSize.value = "3";
+        pato.pageNow.value = "1";
+}
+</script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+<a href="http://www.sipo.gov.cn/"><img src="images/logo.jpg"/></a><a href="index.action"><img src="images/logo_r.jpg"/></a>
+</div>
+<ul class="nav">
+<li><a href="index.action">首页</a></li>
+<li><a href="gjcx.jsp">高级查询</a></li>
+<li><a href="ipc.jsp">IPC分类查询</a></li>
+<li><a href="loc.jsp">LOC分类查询</a></li>
+<li><a href="flzt.jsp">事务数据查询</a></li>
+<li><a href="sjsm.jsp">数据说明</a></li>
+</ul>
+<!--soso-->
+<div class="soso_box2">
+<dl>
+<dt>
+                                公布公告查询
+                                <input class="inputin" id="soso_text" onkeypress="javascript:if(event.keyCode == 13) patqs()" type="text" value=""/>
+<input class="sobtn" id="soso" onclick="patqs()" src="images/soso_ann.png" type="image"/>
+</dt>
+<dd>
+<span><input name="lx" type="checkbox" value="ip"/>发明公布</span>
+<span><input name="lx" type="checkbox" value="ig"/>发明授权</span>
+<span><input name="lx" type="checkbox" value="ug"/>实用新型</span>
+<span><input name="lx" type="checkbox" value="dg"/>外观设计</span>
+<a href="sysm.jsp" target="_blank">使用说明</a>
+</dd>
+</dl>
+</div>
+<form action="patentoutline.action" id="pato" method="post">
+<input name="showType" type="hidden"/>
+<input name="strSources" type="hidden"/>
+<input name="strWhere" type="hidden"/>
+<input name="numSortMethod" type="hidden"/>
+<input name="strLicenseCode" type="hidden"/>
+<input name="numIp" type="hidden"/>
+<input name="numIpc" type="hidden"/>
+<input name="numIg" type="hidden"/>
+<input name="numIgc" type="hidden"/>
+<input name="numIgd" type="hidden"/>
+<input name="numUg" type="hidden"/>
+<input name="numUgc" type="hidden"/>
+<input name="numUgd" type="hidden"/>
+<input name="numDg" type="hidden"/>
+<input name="numDgc" type="hidden"/>
+<input name="pageSize" type="hidden"/>
+<input name="pageNow" type="hidden"/>
+</form>
+<form action="patentdetail.action" id="patd" method="post" target="_blank">
+<input name="strSources" type="hidden"/>
+<input name="strWhere" type="hidden"/>
+<input name="strLicenseCode" type="hidden"/>
+<input name="pageSize" type="hidden"/>
+<input name="pageNow" type="hidden"/>
+</form>
+<form action="fullTran.action" id="prsd" method="post" target="_blank">
+<input name="an" type="hidden"/>
+</form>
+<form action="pam.action" id="pam" method="post" target="_blank">
+<input name="strSources" type="hidden"/>
+<input name="strWhere" type="hidden"/>
+<input name="recordCursor" type="hidden"/>
+<input name="strLicenseCode" type="hidden"/>
+</form>
+<div class="main">
+<div class="w187 left">
+<dl class="lxxz_dl">
+<dt>类型选择</dt>
+<dd><ul>
+<li><a class="hover">发明公布</a></li><li><a href="javascript:zl_lx('pig');">发明授权</a></li></ul></dd>
+</dl>
+<dl class="lxxz_dl">
+<dt>排序方式</dt>
+<dd><ul>
+<li><a href="javascript:zl_px(1);">按申请日升序排序</a></li>
+<li><a href="javascript:zl_px(2);">按申请日降序排序</a></li>
+<li><a href="javascript:zl_px(3);">按公布公告日升序排序</a></li>
+<li><a href="javascript:zl_px(4);">按公布公告日降序排序</a></li>
+</ul></dd>
+</dl>
+</div>
+<!--right-->
+<div class="w790 right">
+<dl class="list_dl">
+<dd>
+<ul>
+<li><a class="hover" href="javascript:zl_gb();">公布模式</a></li>
+<li class="lb_a"><a href="javascript:zl_lb();">列表模式</a></li>
+<li class="ft_a"><a href="javascript:zl_ft();">附图模式</a></li>
+</ul>
+</dd>
+<dt>
+<select id="ts" onchange="zl_ts(3, 1)">
+<option selected="selected" value="3">每页显示3条记录</option>
+<option value="10">每页显示10条记录</option>
+</select>
+</dt>
+</dl>
+<div class="cp_box">
+<div class="cp_img">
+<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/ws15t/PUBXML/3015/FMGB/FMGB_DZGBD/2013106289097/100005/20131062890971000051_thumb.jpg"/>
+</div>
+<div class="cp_linr">
+<h1>
+                                [发明公布] 一种用于确定用户的访问需求信息的方法与设备</h1>
+<ul>
+<li class="wl228">申请公布号：CN103713894A</li>
+<li class="wl228">申请公布日：2014.04.09</li>
+<li class="wl228">申请号：2013106289097</li>
+<li class="wl228">申请日：2013.11.28</li>
+<li class="wl228">申请人：百度时代网络技术（北京）有限公司</li>
+<li class="wl228">发明人：叶莎妮; 黄剑; 吴敬桐</li>
+<li class="clear"></li>
+<li>地址：100080北京市海淀区东北旺西路8号中关村软件园17号楼二层A2</li>
+<li>分类号：G06F9/44(2006.01)I; G06F17/30(2006.01)I  <a class="zhankai" href="javascript:;" style="color:#c5000f">全部</a>
+<div style="display:none;"><ul>
+<li>专利代理机构：北京汉昊知识产权代理事务所(普通合伙)11370</li><li>代理人：罗朋; 周建华</li></ul></div>
+</li>
+</ul>
+<div class="cp_jsh">
+<span id="tit">
+                                摘要：</span>
+                                本发明的目的是提供一种用于确定用户的访问需求信息与访问轨迹信息的方法与设备。需求确定设备根据用户的访问记录信息，确定与所述用户相对应的用户访问轨迹信息，然后根据与所述用户访问轨迹信息相对应的参考用户访问轨迹信息，确定与所述用户相对应的访问 需求信息；<span style="display:none;">轨迹确定设备根据所述访问记录信息，并与所述访问记录信息中操作信息所对应的访问对象相对应的描述信息，获取与所述访问记录信息相对应的对象访问轨迹信息，并将其提供给用户。与现有技术相比，本发明减少了误操作等因素对所述对象访问轨迹信息以及访 问需求信息准确性的影响，实现了所述访问需求信息的预测，符合用户的个性化需求，提高用户体验。</span>  <a class="zhankaizy" href="javascript:;" id="tit">全部</a>
+</div>
+<p class="cp_botsm">
+<span><a href="javascript:pam3('pip','CN103713894A','0');">【发明专利】</a></span>
+<span><a href="javascript:pam3('pip','CN103713894A','1');">【发明专利申请】</a></span>
+<span><a href="javascript:sw_xx('2013106289097');">事务数据</a></span>
+</p>
+</div>
+<a class="qrcode" href="qrcode/CN103713894A.png" id="CN103713894A"><img height="74" src="qrcode/CN103713894A.png" width="74"/></a>
+</div>
+<div class="cp_box">
+<div class="cp_img">
+<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/ws15t/PUBXML/3117/FMGB/FMGB_DZGBD/2014108043467/100005/EDA0000639001270000011_thumb.jpg"/>
+</div>
+<div class="cp_linr">
+<h1>
+                                [发明公布] 产生叠加在播放对象上的弹幕的方法和装置</h1>
+<ul>
+<li class="wl228">申请公布号：CN104575553A</li>
+<li class="wl228">申请公布日：2015.04.29</li>
+<li class="wl228">申请号：2014108043467</li>
+<li class="wl228">申请日：2014.12.19</li>
+<li class="wl228">申请人：百度时代网络技术（北京）有限公司</li>
+<li class="wl228">发明人：宋鳌;<a class="zhankaizt" href="javascript:;"><img src="images/jtx.bmp"/></a>
+<div style="display:none;"> 陈国庆; 张健; 杜曲生; 胡侨鑫; 褚静波; 郏夹; 李凡; 娄同兵</div>
+</li>
+<li class="clear"></li>
+<li>地址：100080北京市海淀区东北旺西路8号中关村软件园17号楼二层A2</li>
+<li>分类号：G11B27/10(2006.01)I  <a class="zhankai" href="javascript:;" style="color:#c5000f">全部</a>
+<div style="display:none;"><ul>
+<li>专利代理机构：北京汉昊知识产权代理事务所(普通合伙)11370</li><li>代理人：朱海波</li></ul></div>
+</li>
+</ul>
+<div class="cp_jsh">
+<span id="tit">
+                                摘要：</span>
+                                本发明提供了一种产生叠加在播放对象上的弹幕的方法和装置。该方法包括：接收当前用户以外的其它用户发表的弹幕文字；根据当前用户的登录账户信息中的好友信息，判断该其它用户是否是当前用户的好友；在播放对象上播放所述弹幕文字,其中如果该其它用户不是当前用户的好<span style="display:none;">友，以第一播放轨迹形状在播放对象上播放弹幕文字；如果该其它用户是当前用户的好友，以不同于第一播放轨迹形状的第二播放轨迹形状在播放对象上播放弹幕文字。本发明提高了弹幕播放对用户的针对性，使用户能够从大量弹幕的播放中更迅速获取有用的信息 。</span>  <a class="zhankaizy" href="javascript:;" id="tit">全部</a>
+</div>
+<p class="cp_botsm">
+<span><a href="javascript:pam3('pip','CN104575553A','0');">【发明专利】</a></span>
+<span><a href="javascript:pam3('pip','CN104575553A','1');">【发明专利申请】</a></span>
+<span><a href="javascript:sw_xx('2014108043467');">事务数据</a></span>
+</p>
+</div>
+<a class="qrcode" href="qrcode/CN104575553A.png" id="CN104575553A"><img height="74" src="qrcode/CN104575553A.png" width="74"/></a>
+</div>
+<div class="cp_box">
+<div class="cp_img">
+<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/ws9100/PUBXML/344702/FMGB/FMGB_DZGBD/201780002534X/100005/EDA0001558474300000011_thumb.jpg"/>
+</div>
+<div class="cp_linr">
+<h1>
+                                [发明公布] 解决自动驾驶车辆的转向不足的自动转向控制参考自适应</h1>
+<ul>
+<li class="wl228">申请公布号：CN108885152A</li>
+<li class="wl228">申请公布日：2018.11.23</li>
+<li class="wl228">申请号：201780002534X</li>
+<li class="wl228">申请日：2017.03.10</li>
+<li class="wl228">申请人：百度时代网络技术（北京）有限公司;<a class="zhankaizt" href="javascript:;"><img src="images/jtx.bmp"/></a>
+<div style="display:none;"> 百度（美国）有限责任公司</div>
+</li>
+<li class="wl228">发明人：罗琦;<a class="zhankaizt" href="javascript:;"><img src="images/jtx.bmp"/></a>
+<div style="display:none;"> 孔旗; 朱帆; 胡森; 于翔; 朱振广; 潘余昌; 何家瑞; 樊昊阳; 杨光; 王京傲</div>
+</li>
+<li class="clear"></li>
+<li>地址：100080北京市海淀区东北旺西路8号中关村软件园17号楼二层A2</li>
+<li>分类号：G01M1/12(2006.01)I;  <a class="zhankai" href="javascript:;" style="color:#c5000f">全部</a><div style="display:none;"><ul>
+<li> G01G19/10(2006.01)I; B60R16/02(2006.01)I</li>
+<li>专利代理机构：北京英赛嘉华知识产权代理有限责任公司11204</li><li>代理人：马晓亚; 王艳春</li><li>PCT进入国家阶段日：2018.01.25</li><li>PCT申请数据：PCT/CN2017/076240 2017.03.10</li><li>PCT公布数据：WO2018/161336 EN 2018.09.13</li></ul></div></li>
+</ul>
+<div class="cp_jsh">
+<span id="tit">
+                                摘要：</span>
+                                在一个实施方式中，接收将自动驾驶车辆(ADV)从第一方向转到第二方向的请求。响应于该请求，确定ADV的多个区段的多个区段质量。区段质量定位在ADV的车辆平台内的多个预定位置上。基于ADV的区段的区段质量来计算整个ADV的质量中心的位置，其中质量中心表示整个ADV的整个<span style="display:none;">质量的中心。基于整个ADV的质量中心的位置的转向控制命令以用于ADV的转向控制。</span>  <a class="zhankaizy" href="javascript:;" id="tit">全部</a>
+</div>
+<p class="cp_botsm">
+<span><a href="javascript:pam3('pip','CN108885152A','0');">【发明专利申请】</a></span>
+<span><a href="javascript:sw_xx('201780002534X');">事务数据</a></span>
+</p>
+</div>
+<a class="qrcode" href="qrcode/CN108885152A.png" id="CN108885152A"><img height="74" src="qrcode/CN108885152A.png" width="74"/></a>
+</div>
+<div class="next">
+<a class="hover" href="javascript:zl_fy(1);">1</a>
+<a href="javascript:zl_fy(2);">2</a>
+<a href="javascript:zl_fy(3);">3</a>
+<a href="javascript:zl_fy(4);">4</a>
+<a href="javascript:zl_fy(5);">5</a>
+<a href="javascript:zl_fy(6);">6</a>
+<a href="javascript:zl_fy(2);">&gt;</a><span>转到 <input class="w50" id="pn" onkeypress="javascript:if(event.keyCode == 13) zl_tz(6)" type="text" value=""/> 页 </span></div></div>
+</div>
+<img src="images/waiting.gif" style="display:none"/>
+<div class="clear"></div>
+<!--footer-->
+<div class="footer">
+<dl>
+<dt><img src="images/foot_logo.jpg"/></dt>
+<dd>
+<ul>
+<li><a href="bqsm.jsp">版权声明</a>|<a href="lxwm.jsp">联系我们</a></li>
+<li>主办单位：国家知识产权局　软件维护：知识产权出版社　ICP备案编号：京ICP05069085号</li>
+<li>版权所有：国家知识产权局（未经许可不得复制）　技术支持：010-62086415/6466</li>
+</ul>
+</dd>
+<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/33/000/0000/60412369/CA330000000604123690015.js' type='text/javascript'%3E%3C/script%3E"));</script>
+</dl>
+</div>
+<div style="display:none;"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F06635991e58cd892f536626ef17b3348' type='text/javascript'%3E%3C/script%3E"));
+</script></div>
+<script ignoreapd="1" src="http://static.gridsumdissector.com/js/Clients/GWD-000530-B8BCC7/gs.js" type="text/javascript"></script>
+</body>
+</html>

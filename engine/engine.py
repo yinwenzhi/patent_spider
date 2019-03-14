@@ -17,7 +17,7 @@ class SpiderEngine(ABC):
 
     def get_ip(self):
         # 这里使用西瓜代理池，www.xiguadaili.com，获取可用的IP地址
-        i = random.randint(1, 2)
+        i = random.randint(1, 3)
         time.sleep(i)
         ip_url = self.ip_url
         ip = requests.get(ip_url)
@@ -25,15 +25,16 @@ class SpiderEngine(ABC):
         for each in ip_list:
             yield {"http": each}
 
-    def get_html(self, applicant, ip=None, pageNow=1):
+    def get_html(self, applicant, ip=None, strSources='pip', pageNow=1):
         url = self.url
         timeout = self.timeout
 
         headers = {
-            "User-Agent": "Mozilla/5.0(Windows NT 10.0;Win64; x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 70.0.3538.77Safari / 537.36"
+            "User-Agent": "Mozilla/5.0(Windows NT 10.0;Win64; x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 70.0.3538.77 Safari / 537.36"
+            # "User-Agent": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 70.0.3538.77 Safari / 537.36"
             }
         form_data = {"showType": 1,
-                     "strSources": "pig",
+                     "strSources": strSources,
                      "strWhere": "PA='%{}%'".format(applicant),
                      "numSortMethod": 4,
                      "strLicenseCode": "",
