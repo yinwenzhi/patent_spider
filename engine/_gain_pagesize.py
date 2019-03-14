@@ -50,7 +50,10 @@ class GainPageSize(SpiderEngine):
                 except requests.exceptions.ReadTimeout as e:
                     log.error(f"# {idx+1}-{flag+1}: ReadTimeout({self.timeout})")
                     continue
-
+                except requests.exceptions.ConnectionError as e:
+                    log.error(f"# {idx+1}-{flag+1}: Connection aborted")
+                    continue
+                    
                 html.encoding = 'utf-8'
                 soup = BeautifulSoup(html.text, 'lxml')
                 # print(soup)
