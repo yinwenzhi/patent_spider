@@ -13,7 +13,7 @@ url: "http://epub.sipo.gov.cn/patentoutline.action"
 ip_url: 'http://api3.xiguadaili.com/ip/?tid=556604581095711&num=1000&sortby=time'
 
 # pklfile: 'results\\publish\\companys_publish.pkl'
-# pklfile: 'results\\publish\\companys_publish_1.pkl'
-pklfile: 'results\\publish\\companys_publish_2.pkl'
+pklfile: 'results\\publish\\companys_publish_1.pkl'
+# pklfile: 'results\\publish\\companys_publish_2.pkl'
 # pklfile: 'results\\publish\\companys_publish_3.pkl'
 # pklfile: 'results\\publish\\companys_authorization.pkl'

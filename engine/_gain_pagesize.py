@@ -18,7 +18,7 @@ class GainPageSize(SpiderEngine):
         self.start = config['start']
         self.end = config['end']
 
-        super(GainPageSize, self).__init__(config)
+        super(GainPageSize, self).__init__(config)#调用父类的__init__函数load pickfile 并付给results
 
         self.end = len(self.results) if self.end == None or self.end > len(self.results) else self.end
 
@@ -79,7 +79,7 @@ class GainPageSize(SpiderEngine):
                         log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
                         continue
                 log.info(f' # {idx+1}-{flag+1}: {company} success\n')
-                idx += 1
+                
                 flag = 0
                 self.spider_success+=1
                 self.spider_all+=1
@@ -89,6 +89,7 @@ class GainPageSize(SpiderEngine):
                 log.info(f" # {idx+1}-{flag+1}: 保存到文件")
                 t2 = time.time()
                 log.info(f' # 耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                idx += 1
             else:
                 log.info(f' # {idx+1}-{flag+1}: {company} has successed\n')
                 idx += 1

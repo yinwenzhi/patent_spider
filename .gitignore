@@ -4,6 +4,9 @@
 # pkl
 *.xls
 
+#vscode config
+.vscode
+
 # picture
 *.jpg
 

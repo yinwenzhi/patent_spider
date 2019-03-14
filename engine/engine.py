@@ -6,6 +6,7 @@ import shutil
 import requests
 import random
 from abc import ABC, abstractmethod
+#abc模块是一个基类，继承于 abc基类的子类中的方法带有@abstractmethod的方法在使用时必须自定义实现
 
 class SpiderEngine(ABC):
     def __init__(self, config):
@@ -53,7 +54,7 @@ class SpiderEngine(ABC):
                      "numUgd": "",
                      "numDg": "",
                      "numDgc": "",
-                     "pageSize": 10,
+                     "pageSize": 3,
                      "pageNow": pageNow}
 
         html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)

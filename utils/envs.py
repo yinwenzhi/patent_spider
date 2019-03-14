@@ -10,6 +10,7 @@ import numpy as np
 from .fileproc import safeMakeDirs
 from .cfg_parser import getConfig
 
+#创建日志文件或者输出日志到屏幕
 def setLogging(log_dir, stdout_flag):
     safeMakeDirs(log_dir)
     dt = datetime.now()
@@ -35,7 +36,7 @@ def initEnv(patent_class):
         cur_cfg['strSources'] = 'pig'
     else:
         return
-
+    #获取档期那目录并组合成新的目录
     logs_dir = os.path.join(cur_cfg['logs'], patent_class)
 
     results_dir = os.path.join(cur_cfg['results'], patent_class)
