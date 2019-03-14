@@ -66,9 +66,11 @@ class GainPageSize(SpiderEngine):
                             flag+=1
                             if flag >= self.trytimes:
                                 self.spider_all+=1
-                                log.info(f'# {idx+1}-{flag}: {company} failed\n')
+                                log.info(f'# {idx+1}-{flag}: {company} failed')
                                 idx += 1
                                 flag = 0
+                                t2 = time.time()
+                                log.info(f'# 耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                             continue
                         else:
                             log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
