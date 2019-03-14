@@ -36,12 +36,11 @@ class GainContent(SpiderEngine):
         
         cp_boxes_text = soup.findAll("div", class_="cp_box")
         result_page_contents = []
-        for cp_box in cp_boxes_text:
-                
-                #print(cp_box)
-                result_content = self.prase_cp_box(cp_box)
-                print(result_content)
-                result_page_contents.append(result_content)
+        for cp_box in cp_boxes_text:  
+            #print(cp_box)
+            result_content = self.prase_cp_box(cp_box)
+            print(result_content)
+            result_page_contents.append(result_content)
         return result_page_contents
 
     def start_spider(self):
