@@ -1,4 +1,5 @@
 import logging as log
+import pickle
 import os
 import time
 import shutil
@@ -14,6 +15,10 @@ class SpiderEngine(ABC):
         self.ip_url = config['ip_url']
         self.spider_all = 0
         self.spider_success = 0
+        self.pklfile = config['pklfile']
+
+        with open(self.pklfile, 'rb') as f:
+            self.results = pickle.load(f)
 
     def get_ip(self):
         # 这里使用西瓜代理池，www.xiguadaili.com，获取可用的IP地址
