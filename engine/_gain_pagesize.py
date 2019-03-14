@@ -53,6 +53,8 @@ class GainPageSize(SpiderEngine):
                 except requests.exceptions.ConnectionError as e:
                     log.error(f"# {idx+1}-{flag+1}: Connection aborted")
                     continue
+                except requests.exceptions.ChunkedEncodingError as e:
+                    log.error(f"# {idx+1}-{flag+1}: Connection broken: IncompleteRead")
                     
                 html.encoding = 'utf-8'
                 soup = BeautifulSoup(html.text, 'lxml')
@@ -63,6 +65,7 @@ class GainPageSize(SpiderEngine):
                     start = posion.find('zl_tz')+6
                     page_size = int(posion[start:-1])
                     self.results[idx]['page_size'] = page_size
+                    
                 except:
                     if soup.find("h1", class_="head_title") == None:
                         log.error(f"# {idx+1}-{flag+1}: 没有您要查询的结果")
