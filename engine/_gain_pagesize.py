@@ -53,7 +53,7 @@ class GainPageSize(SpiderEngine):
                 except requests.exceptions.ConnectionError as e:
                     log.error(f"# {idx+1}-{flag+1}: Connection aborted")
                     continue
-                    
+
                 html.encoding = 'utf-8'
                 soup = BeautifulSoup(html.text, 'lxml')
                 # print(soup)
@@ -73,7 +73,7 @@ class GainPageSize(SpiderEngine):
                             idx += 1
                             flag = 0
                             t2 = time.time()
-                            log.info(f' # 耗时{round((t2-t1),1)}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                            log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                         continue
                     else:
                         log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
@@ -88,7 +88,7 @@ class GainPageSize(SpiderEngine):
                     pickle.dump(self.results, f)
                 log.info(f" # {idx+1}-{flag+1}: 保存到文件")
                 t2 = time.time()
-                log.info(f' # 耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
             else:
                 log.info(f' # {idx+1}-{flag+1}: {company} has successed\n')
                 idx += 1

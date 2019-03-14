@@ -53,7 +53,7 @@ class SpiderEngine(ABC):
                      "numUgd": "",
                      "numDg": "",
                      "numDgc": "",
-                     "pageSize": 10,
+                     "pageSize": 3,
                      "pageNow": pageNow}
 
         html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
