@@ -41,9 +41,13 @@ class GainPageSize(SpiderEngine):
                         continue
                     i = random.randint(1, 3)
                     time.sleep(i)
+                    
                     try:
                         html = self.get_html(applicant=company, ip=ip, strSources=self.strSources)
                     except requests.exceptions.ProxyError as e:
+                        log.error(f"# {idx+1}-{flag+1}: {e}")
+                        continue
+                    except requests.exceptions.ReadTimeout as e:
                         log.error(f"# {idx+1}-{flag+1}: {e}")
                         continue
 
