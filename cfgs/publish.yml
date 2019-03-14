@@ -2,7 +2,7 @@ results: "results"
 logs: "logs"
 
 stdout: True
-timeout: 30
+timeout: 15
 trytimes: 15
 
 start: 0
@@ -12,7 +12,7 @@ url: "http://epub.sipo.gov.cn/patentoutline.action"
 # ip_url: "http://api3.xiguadaili.com/ip/?tid=557432612903222&num=5000&delay=1&sortby=time"
 ip_url: 'http://api3.xiguadaili.com/ip/?tid=556604581095711&num=1000&sortby=time'
 
-# pklfile: 'results\\publish\\companys_publish.pkl'
-# pklfile: 'results\\publish\\companys_publish_1.pkl'
-pklfile: 'results\\publish\\companys_publish_2.pkl'
-# pklfile: 'results\\publish\\companys_publish_3.pkl'
+# pklfile: 'results\\publish\\publish.pkl'
+# pklfile: 'results\\publish\\publish_1.pkl'
+pklfile: 'results\\publish\\publish_2.pkl'
+# pklfile: 'results\\publish\\publish_3.pkl'
