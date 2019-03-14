@@ -54,13 +54,13 @@ def concentrate_pkl(pklfile,pklfile_1,pklfile_2,pklfile_3):
 
 def main():
     excelfile='C:\\Files\\Documents\\apollo项目组\\国防科工局成果转化目录\\海淀区的企业名称.xlsx'
+    patent_class = 'publish'
+    # patent_class = 'authorization'
 
-    pklfile = 'results\\publish\\companys_publish.pkl'
-    pklfile_1 = 'results\\publish\\companys_publish_1.pkl'
-    pklfile_2 = 'results\\publish\\companys_publish_2.pkl'
-    pklfile_3 = 'results\\publish\\companys_publish_3.pkl'
-
-    # pklfile='C:\\Users\\qhykk\\Desktop\\companys_authorization.pkl'
+    pklfile = 'results\\' + patent_class + '\\' + patent_class + '.pkl'
+    pklfile_1 = 'results\\' + patent_class + '\\' + patent_class + '_1.pkl'
+    pklfile_2 = 'results\\' + patent_class + '\\' + patent_class + '_2.pkl'
+    pklfile_3 = 'results\\' + patent_class + '\\' + patent_class + '_3.pkl'
 
     # create a new pkl file
     # wb = xlrd.open_workbook(excelfile)
@@ -68,11 +68,11 @@ def main():
     # companys = sheet.col_values(0)[1:8672]
     # new_companys_pkl(pklfile, companys)
 
-    # count(pklfile)
-    # count(pklfile_1)
-    # count(pklfile_2)
-    # count(pklfile_3)
-    split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
+    count(pklfile)
+    count(pklfile_1)
+    count(pklfile_2)
+    count(pklfile_3)
+    # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
 if __name__ == "__main__":

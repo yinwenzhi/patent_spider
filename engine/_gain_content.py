@@ -18,11 +18,11 @@ class GainContent(SpiderEngine):
         self.start = config['start']
         self.end = config['end']
 
-        super(GainContent, self).__init__(config)#调用父类的__init__函数load pickfile 并付给results
+        super(GainContent, self).__init__(config)
 
         self.end = len(self.results) if self.end == None or self.end > len(self.results) else self.end
 
-    def prase_cp_box(self,cp_box):
+    def prase_cp_box(self, cp_box):
         print("**********************") 
         title = cp_box.h1.text.split("\xa0")[1]
         li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
@@ -32,7 +32,7 @@ class GainContent(SpiderEngine):
         li_list['abstract'] = abstract
         return li_list
     
-    def prase_page_cp_boxes(self,soup):
+    def prase_page_cp_boxes(self, soup):
         
         cp_boxes_text = soup.findAll("div", class_="cp_box")
         result_page_contents = []
