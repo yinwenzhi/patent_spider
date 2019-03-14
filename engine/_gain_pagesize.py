@@ -83,7 +83,7 @@ class GainPageSize(SpiderEngine):
                         pickle.dump(results, f)
                     log.info(f"# 保存到文件")
                     t2 = time.time()
-                    log.info(f'耗时{t2-t1}seconds, 成功爬取了{eng.spider_success}/{eng.spider_all}家公司\n')
+                    log.info(f'耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                 else:
                     log.info(f'# {idx+1}-{flag+1}: {company} has successed\n')
                     idx += 1
