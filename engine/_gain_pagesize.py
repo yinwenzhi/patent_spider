@@ -69,7 +69,7 @@ class GainPageSize(SpiderEngine):
                         flag+=1
                         if flag >= self.trytimes:
                             self.spider_all+=1
-                            log.info(f' # {idx+1}-{flag}: {company} failed')
+                            log.info(f' # {idx+1}-{flag}: {company} failed\n')
                             idx += 1
                             flag = 0
                             t2 = time.time()
@@ -79,16 +79,15 @@ class GainPageSize(SpiderEngine):
                         log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
                         continue
                 log.info(f' # {idx+1}-{flag+1}: {company} success\n')
-                idx += 1
-                flag = 0
                 self.spider_success+=1
                 self.spider_all+=1
-
                 with open(self.pklfile, 'wb') as f:
                     pickle.dump(self.results, f)
                 log.info(f" # {idx+1}-{flag+1}: 保存到文件")
                 t2 = time.time()
                 log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                idx += 1
+                flag = 0
             else:
                 log.info(f' # {idx+1}-{flag+1}: {company} has successed\n')
                 idx += 1
