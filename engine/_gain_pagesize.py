@@ -53,6 +53,8 @@ class GainPageSize(SpiderEngine):
                 except requests.exceptions.ConnectionError as e:
                     log.error(f"# {idx+1}-{flag+1}: Connection aborted")
                     continue
+                except requests.exceptions.ChunkedEncodingError as e:
+                    log.error(f"# {idx+1}-{flag+1}: Connection broken: IncompleteRead")
 
                 html.encoding = 'utf-8'
                 soup = BeautifulSoup(html.text, 'lxml')
