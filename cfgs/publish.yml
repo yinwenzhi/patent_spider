@@ -2,7 +2,7 @@ results: "results"
 logs: "logs"
 
 stdout: True
-timeout: 5
+timeout: 15
 trytimes: 15
 
 start: 0
