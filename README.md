@@ -3,7 +3,7 @@
 
 ---
 
-### Gain Pagesize
+### Step 1: Gain Pagesize
 `cd ${spider_root}`
 
 ##### 1) publish
@@ -34,14 +34,14 @@
 
 `python gain_pagesize.py authorization`
 
-### Gain Content
+### Step 2: Gain Content
 `cd ${spider_root}`
 
 ##### 1) publish
 
 1.1) open cfgs/publish.yml,
 
-1.2) let the `pklfile` to the pickle file need to changed
+1.2) change the `pklfile` refer to the former step and let the `pklfile` to the pickle file need to changed
 
 1.3) let the `ip_url` to a vaild ip agent
 
@@ -55,7 +55,7 @@
 
 1.1) open cfgs/authorization.yml
 
-1.2) let the `pklfile` to the pickle file need to changed
+1.2) change the `pklfile` refer to the former step and let the `pklfile` to the pickle file need to changed
 
 1.3) let the `ip_url` to a vaild ip agent
 
