@@ -2,10 +2,10 @@ results: "results"
 logs: "logs"
 
 stdout: True
-timeout: 30
-trytimes: 15
+timeout: 15
+trytimes: 5
 
-start: 18
+start: 21
 end: ~
 
 url: "http://epub.sipo.gov.cn/patentoutline.action"
