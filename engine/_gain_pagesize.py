@@ -20,7 +20,7 @@ class GainPageSize(SpiderEngine):
 
         super(GainPageSize, self).__init__(config)
 
-        self.end = len(self.results) if self.end > len(self.results) else self.end
+        self.end = len(self.results) if self.end == None or self.end > len(self.results) else self.end
 
     def start_spider(self):
 
