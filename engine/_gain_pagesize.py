@@ -19,7 +19,7 @@ class GainPageSize(SpiderEngine):
         self.end = config['end']
 
         super(GainPageSize, self).__init__(config)
-        
+
         self.end = len(self.results) if self.end > len(self.results) else self.end
 
     def start_spider(self):
@@ -70,7 +70,7 @@ class GainPageSize(SpiderEngine):
                             idx += 1
                             flag = 0
                             t2 = time.time()
-                            log.info(f' # 耗时{t2-t1}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                            log.info(f' # 耗时{round((t2-t1),1)}seconds, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                         continue
                     else:
                         log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")  
