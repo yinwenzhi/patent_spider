@@ -9,8 +9,8 @@ start: 0
 end: ~
 
 url: "http://epub.sipo.gov.cn/patentoutline.action"
-# ip_url: "http://api3.xiguadaili.com/ip/?tid=557432612903222&num=5000&delay=1&sortby=time"
-ip_url: 'http://api3.xiguadaili.com/ip/?tid=556604581095711&num=1000&sortby=time'
+
+ip_url: 
 
 # pklfile: 'results\\authorization\\authorization.pkl'
 # pklfile: 'results\\authorization\\authorization_1.pkl'
