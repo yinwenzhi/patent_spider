@@ -95,12 +95,13 @@ def main():
     # sheet = wb.sheet_by_name('Sheet1')
     # companys = sheet.col_values(0)[1:8672]
     # new_companys_pkl(pklfile, companys)
-
-    # count(pklfile)
-    # count(pklfile_1)
-    count(pklfile_2)
-    # count(pklfile_3)
     # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
+    
+    count(pklfile)
+    count(pklfile_1)
+    count(pklfile_2)
+    count(pklfile_3)
+    
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
 if __name__ == "__main__":
