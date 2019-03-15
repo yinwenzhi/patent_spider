@@ -59,6 +59,26 @@ class SpiderEngine(ABC):
         html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
         return html
 
+    def prase_cp_box(self, cp_box):
+        # print("**********************") 
+        title = cp_box.h1.text.split("\xa0")[1]
+        li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
+                cp_box.find_all('li') if e.text.strip() != '' and len(' '.join(e.text.split()).split("：")) >= 2}
+        li_list['tile']= title
+        abstract =cp_box.find("div", class_="cp_jsh").find_all('span')[1].text
+        li_list['abstract'] = abstract
+        return li_list
+    
+    def prase_page_cp_boxes(self, soup):
+        cp_boxes_text = soup.findAll("div", class_="cp_box")
+        result_page_contents = []
+        for cp_box in cp_boxes_text:  
+            #print(cp_box)
+            result_content = self.prase_cp_box(cp_box)
+            # print(result_content)
+            result_page_contents.append(result_content)
+        return result_page_contents
+
     @abstractmethod
     def start_spider(self):
         """ 

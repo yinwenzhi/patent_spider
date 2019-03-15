@@ -70,6 +70,7 @@ class GainPageSize(SpiderEngine):
                     start = posion.find('zl_tz')+6
                     page_size = int(posion[start:-1])
                     self.results[idx]['page_size'] = page_size
+                    self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
                 except:
                     if soup.find("h1", class_="head_title") == None:
                         log.error(f"# {idx+1}-{flag+1}: 没有您要查询的结果")

@@ -22,27 +22,6 @@ class GainContent(SpiderEngine):
 
         self.end = len(self.results) if self.end == None or self.end > len(self.results) else self.end
 
-    def prase_cp_box(self, cp_box):
-        print("**********************") 
-        title = cp_box.h1.text.split("\xa0")[1]
-        li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
-                cp_box.find_all('li') if e.text.strip() != '' and len(' '.join(e.text.split()).split("：")) >= 2}
-        li_list['tile']= title
-        abstract =cp_box.find("div", class_="cp_jsh").find_all('span')[1].text
-        li_list['abstract'] = abstract
-        return li_list
-    
-    def prase_page_cp_boxes(self, soup):
-        
-        cp_boxes_text = soup.findAll("div", class_="cp_box")
-        result_page_contents = []
-        for cp_box in cp_boxes_text:  
-            #print(cp_box)
-            result_content = self.prase_cp_box(cp_box)
-            print(result_content)
-            result_page_contents.append(result_content)
-        return result_page_contents
-
     def start_spider(self):
 
         ip_gene = self.get_ip()
@@ -52,8 +31,10 @@ class GainContent(SpiderEngine):
             flag = 0
             company = self.results[idx]['company']
             page_size = self.results[idx]['page_size']
-            for pagenow in range(page_size):
-                pagenow += 1
+            if page_size == 1:
+                idx += 1
+                continue
+            for pagenow in range(2, page_size+1):
                 if self.results[idx]['patent'][pagenow] == []:
                     try:
                         ip = next(ip_gene)
@@ -80,12 +61,14 @@ class GainContent(SpiderEngine):
                     except requests.exceptions.ChunkedEncodingError as e:
                         log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection broken: IncompleteRead")
                         continue
+                    except requests.exceptions.ContentDecodingError as e:
+                        log.error(f"# {idx+1}-{flag+1}: Received response with content-encoding: gzip, but failed to decode it.")
+                        continue                        
                     html.encoding = 'utf-8'
                     soup = BeautifulSoup(html.text, 'lxml')
                     # print(soup)
                     try:
-                        result_page_contents = self.prase_page_cp_boxes(soup)
-                        self.results[idx]['patent'][pagenow] = result_page_contents
+                        self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
                     except:
                         if soup.find("h1", class_="head_title") == None:
                             log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果")
