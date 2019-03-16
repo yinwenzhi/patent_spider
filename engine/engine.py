@@ -30,7 +30,7 @@ class SpiderEngine(ABC):
         for each in ip_list:
             yield {"http": each}
 
-    def get_html(self, applicant, ip=None, strSources='pip', pageNow=1):
+    def get_html(self, idx, flag, applicant, ip=None, strSources='pip', pagenow=1):
         url = self.url
         timeout = self.timeout
 
@@ -54,7 +54,7 @@ class SpiderEngine(ABC):
                      "numDg": "",
                      "numDgc": "",
                      "pageSize": 3,
-                     "pageNow": pageNow}
+                     "pageNow": pagenow}
         try:
             html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
         except requests.exceptions.ProxyError as e:
@@ -78,7 +78,7 @@ class SpiderEngine(ABC):
         return html
 
     def prase_cp_box(self, cp_box):
-        # print("**********************") 
+        # print("**********************")
         title = cp_box.h1.text.split("\xa0")[1]
         li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
                 cp_box.find_all('li') if e.text.strip() != '' and len(' '.join(e.text.split()).split("：")) >= 2}
@@ -86,11 +86,11 @@ class SpiderEngine(ABC):
         abstract =cp_box.find("div", class_="cp_jsh").find_all('span')[1].text
         li_list['abstract'] = abstract
         return li_list
-    
+
     def prase_page_cp_boxes(self, soup):
         cp_boxes_text = soup.findAll("div", class_="cp_box")
         result_page_contents = []
-        for cp_box in cp_boxes_text:  
+        for cp_box in cp_boxes_text:
             #print(cp_box)
             result_content = self.prase_cp_box(cp_box)
             # print(result_content)
@@ -99,7 +99,7 @@ class SpiderEngine(ABC):
 
     @abstractmethod
     def start_spider(self):
-        """ 
+        """
         This function start running the spider.
         """
         pass

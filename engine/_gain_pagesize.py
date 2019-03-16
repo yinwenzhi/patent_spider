@@ -26,6 +26,7 @@ class GainPageSize(engine.SpiderEngine):
 
         ip_gene = self.get_ip()
         flag = 0
+        pagenow = 1
         idx = self.start
         t1 = time.time()
         while idx < self.end:
@@ -34,16 +35,16 @@ class GainPageSize(engine.SpiderEngine):
                 try:
                     ip = next(ip_gene)
                     # print(ip)
-                    log.info(f" # {idx+1}-{flag+1}: 提取IP成功: {ip['http']}")
+                    log.info(f" # {idx+1}-{pagenow}-{flag+1}: 提取IP成功: {ip['http']}")
                 except:
-                    log.error(f"# {idx+1}-{flag+1}: 提取IP失败")
+                    log.error(f"# {idx+1}-{pagenow}-{flag+1}: 提取IP失败")
                     ip_gene = self.get_ip()
                     continue
 
                 i = random.randint(1, 3)
                 time.sleep(i)
 
-                html = self.get_html(applicant=company, ip=ip, strSources=self.strSources,pageNow=pagenow)
+                html = self.get_html(idx, flag, applicant=company, ip=ip, strSources=self.strSources, pagenow=pagenow)
                 if html == False:
                     continue
 
@@ -59,27 +60,27 @@ class GainPageSize(engine.SpiderEngine):
                     self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
                 except:
                     if soup.find("h1", class_="head_title") == None:
-                        log.error(f"# {idx+1}-{flag+1}: 没有您要查询的结果")
+                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果")
                         flag+=1
                         if flag >= self.trytimes:
                             self.spider_all+=1
-                            log.info(f' # {idx+1}-{flag}: {company} failed\n')
+                            log.info(f' # {idx+1}-{pagenow}-{flag}: {company} failed\n')
                             idx += 1
                             flag = 0
                             t2 = time.time()
                             log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
                         continue
                     else:
-                        log.error(f"# {idx+1}-{flag+1}: 被认为是机器人")
+                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")
                         continue
 
-                log.info(f' # {idx+1}-{flag+1}: {company} success\n')
+                log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} success\n')
                 self.spider_success+=1
                 self.spider_all+=1
 
                 with open(self.pklfile, 'wb') as f:
                     pickle.dump(self.results, f)
-                log.info(f" # {idx+1}-{flag+1}: 保存到文件")
+                log.info(f" # {idx+1}-{pagenow}-{flag+1}: 保存到文件")
 
                 t2 = time.time()
                 log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
@@ -87,7 +88,7 @@ class GainPageSize(engine.SpiderEngine):
                 idx += 1
                 flag = 0
             else:
-                log.info(f' # {idx+1}-{flag+1}: {company} has successed\n')
+                log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} has successed\n')
                 idx += 1
                 flag = 0
 

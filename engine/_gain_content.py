@@ -47,7 +47,7 @@ class GainContent(engine.SpiderEngine):
                     i = random.randint(1, 3)
                     time.sleep(i)
 
-                    html = self.get_html(applicant=company, ip=ip, strSources=self.strSources,pageNow=pagenow)
+                    html = self.get_html(idx, flag, applicant=company, ip=ip, strSources=self.strSources, pagenow=pagenow)
                     if html == False:
                         continue
 
