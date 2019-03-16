@@ -55,8 +55,26 @@ class SpiderEngine(ABC):
                      "numDgc": "",
                      "pageSize": 3,
                      "pageNow": pageNow}
-
-        html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
+        try:
+            html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
+        except requests.exceptions.ProxyError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: 连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败")
+            return False
+        except requests.exceptions.ReadTimeout as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: ReadTimeout({self.timeout})")
+            return False
+        except requests.exceptions.ConnectionError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection aborted")
+            return False
+        except requests.exceptions.ChunkedEncodingError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection broken: IncompleteRead")
+            return False
+        except requests.exceptions.ContentDecodingError as e:
+            log.error(f"# {idx+1}-{flag+1}: Received response with content-encoding: gzip, but failed to decode it.")
+            return False
+        except requests.exceptions.TooManyRedirects as e:
+            log.error(f"# {idx+1}-{flag+1}: e")
+            return False
         return html
 
     def prase_cp_box(self, cp_box):

@@ -4,11 +4,11 @@ import os
 import time
 import sys
 import logging as log
-from .engine import SpiderEngine
+from . import engine
 import random
 import requests
 
-class GainContent(SpiderEngine):
+class GainContent(engine.SpiderEngine):
     def __init__(self, config):
         self.config = config
         # all in args
@@ -41,29 +41,16 @@ class GainContent(SpiderEngine):
                         # print(ip)
                         log.info(f" # {idx+1}-{pagenow}-{flag+1}: 提取IP成功: {ip['http']}")
                     except:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 提取IP失败")                        
+                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 提取IP失败")
                         ip_gene = self.get_ip()
                         continue
                     i = random.randint(1, 3)
                     time.sleep(i)
 
-                    try:
-                        html = self.get_html(applicant=company, ip=ip, strSources=self.strSources,pageNow=pagenow)
-                    except requests.exceptions.ProxyError as e:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败")
+                    html = self.get_html(applicant=company, ip=ip, strSources=self.strSources,pageNow=pagenow)
+                    if html == False:
                         continue
-                    except requests.exceptions.ReadTimeout as e:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: ReadTimeout({self.timeout})")
-                        continue
-                    except requests.exceptions.ConnectionError as e:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection aborted")
-                        continue
-                    except requests.exceptions.ChunkedEncodingError as e:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection broken: IncompleteRead")
-                        continue
-                    except requests.exceptions.ContentDecodingError as e:
-                        log.error(f"# {idx+1}-{flag+1}: Received response with content-encoding: gzip, but failed to decode it.")
-                        continue                        
+
                     html.encoding = 'utf-8'
                     soup = BeautifulSoup(html.text, 'lxml')
                     # print(soup)
@@ -84,7 +71,7 @@ class GainContent(SpiderEngine):
                                     break
                             continue
                         else:
-                            log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")  
+                            log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")
                             continue
                     log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} success\n')
 
@@ -104,6 +91,6 @@ class GainContent(SpiderEngine):
                     flag = 0
                     if pagenow == page_size:
                         idx += 1
-                        break      
+                        break
 
 

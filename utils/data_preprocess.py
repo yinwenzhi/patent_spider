@@ -26,7 +26,7 @@ def filter_companys_pkl(pklfile, pklfile_filter):
             if result['page_size'] == 0:
                 results.remove(result)
             elif result['page_size'] == 1:
-                contine
+                continue
             else:
                 for page in range(2,result['page_size']+1):
                     result['patent'][page] = []
@@ -44,6 +44,16 @@ def count(pklfile):
             company_num += 1
             page_num += result['page_size']
     print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
+
+# 输出pklfile文件中的专利内容
+def output_content(pklfile):
+    with open(pklfile, 'rb') as f:
+        results = pickle.load(f)
+    for result in results:
+        for num in range(result['page_size']):
+            page = result['patent'][num+1]
+            if page != []:
+                print(page)
 
 # 切分pklfile为三等份
 def split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
@@ -96,12 +106,14 @@ def main():
     # companys = sheet.col_values(0)[1:8672]
     # new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
-    
-    count(pklfile)
-    count(pklfile_1)
-    count(pklfile_2)
-    count(pklfile_3)
-    
+
+    # count(pklfile)
+    # count(pklfile_1)
+    # count(pklfile_2)
+    # count(pklfile_3)
+
+    output_content(pklfile_2)
+
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
 if __name__ == "__main__":

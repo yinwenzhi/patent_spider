@@ -1,9 +1,14 @@
-from utils.envs import initEnv
 import argparse
 import logging as log
 from pprint import pformat
-from engine._gain_pagesize import GainPageSize
+import sys
 import time
+
+sys.path.insert(0, '.')
+from engine._gain_pagesize import GainPageSize
+from utils.envs import initEnv
+
+
 
 if __name__ == '__main__':
 
