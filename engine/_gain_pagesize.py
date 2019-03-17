@@ -52,6 +52,7 @@ class GainPageSize(engine.SpiderEngine):
                 html = self.get_html(idx, flag, applicant=company, ip=ip, strSources=self.strSources, pagenow=pagenow)
                 if html == False:
                     ipNeedChange = True
+                    flag = 0
                     continue
 
                 html.encoding = 'utf-8'
@@ -64,7 +65,7 @@ class GainPageSize(engine.SpiderEngine):
                     page_size = int(posion[start:-1])
                     self.results[idx]['page_size'] = page_size
                     self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
-                except AttributeError as e:
+                except:
                     if soup.find("h1", class_="head_title") == None:
                         log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果: {company} {ip['http']}")
                         ipNeedChange = False
