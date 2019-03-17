@@ -49,11 +49,12 @@ def count(pklfile):
 def output_content(pklfile):
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
-    for result in results:
-        for num in range(result['page_size']):
-            page = result['patent'][num+1]
-            if page != []:
-                print(page)
+    for result in results[6:7]:
+        for num in range(1):
+        # for num in range(result['page_size']):
+            print(result['company'])
+            print(result['page_size'])
+            print(result['patent'][num+1])
 
 # 切分pklfile为三等份
 def split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):

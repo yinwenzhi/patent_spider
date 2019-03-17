@@ -2,8 +2,8 @@ results: "results"
 logs: "logs"
 
 stdout: True
-timeout: 30
-trytimes: 15
+timeout: 60
+trytimes: 2
 
 start: 0
 end: ~
