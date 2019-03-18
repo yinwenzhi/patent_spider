@@ -7,6 +7,7 @@ import logging as log
 from . import engine
 import random
 import requests
+from utils.time_conversion import secondstohour, countlasttime
 
 class GainPageSize(engine.SpiderEngine):
     def __init__(self, config):
@@ -21,6 +22,11 @@ class GainPageSize(engine.SpiderEngine):
         super(GainPageSize, self).__init__(config)
 
         self.end = len(self.results) if self.end == None or self.end > len(self.results) else self.end
+
+        self.spider_hassuccessed = 0
+        for result in self.results[self.start:self.end]:
+            if result['page_size'] != 0:
+                self.spider_hassuccessed += 1
 
     def start_spider(self):
 
@@ -43,10 +49,8 @@ class GainPageSize(engine.SpiderEngine):
                         log.error(f"# {idx+1}-{pagenow}-{flag+1}: 提取IP失败")
                         ip_gene = self.get_ip()
                         continue
-                else:
-                    pass
 
-                i = random.randint(2, 6)
+                i = random.randint(1, 3)
                 time.sleep(i)
 
                 html = self.get_html(idx, flag, applicant=company, ip=ip, strSources=self.strSources, pagenow=pagenow)
@@ -65,7 +69,7 @@ class GainPageSize(engine.SpiderEngine):
                     page_size = int(posion[start:-1])
                     self.results[idx]['page_size'] = page_size
                     self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
-                except:
+                except :
                     if soup.find("h1", class_="head_title") == None:
                         log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果: {company} {ip['http']}")
                         ipNeedChange = False
@@ -76,7 +80,8 @@ class GainPageSize(engine.SpiderEngine):
                             idx += 1
                             flag = 0
                             t2 = time.time()
-                            log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                            lasttime = countlasttime((t2-t1), self.spider_all, self.spider_hassuccessed, self.end-self.start)
+                            log.info(f' # 耗时{secondstohour(t2-t1)}, 成功爬取了{self.spider_success}/{self.spider_all}家公司, 预计剩余{lasttime}\n')
                             ipNeedChange = True
                         continue
                     else:
@@ -94,7 +99,8 @@ class GainPageSize(engine.SpiderEngine):
                 log.info(f" # {idx+1}-{pagenow}-{flag+1}: 保存到文件")
 
                 t2 = time.time()
-                log.info(f' # 共耗时{round((t2-t1)/60,1)}分, 成功爬取了{self.spider_success}/{self.spider_all}家公司\n')
+                lasttime = countlasttime((t2-t1), self.spider_all, self.spider_hassuccessed, self.end-self.start)
+                log.info(f' # 耗时{secondstohour(t2-t1)}, 成功爬取了{self.spider_success}/{self.spider_all}家公司, 预计剩余{lasttime}\n')
 
                 idx += 1
                 flag = 0
