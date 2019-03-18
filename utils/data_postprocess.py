@@ -5,10 +5,12 @@ from tqdm import tqdm
 from openpyxl.styles import Font, Alignment
 
 def main():
-    results_conversion = {"tile":2,"地址":3,"分类号":4,"申请号":5,"申请人":9,"专利权人":9,"发明人":10,"申请日":12,"abstract":13,"申请公布日":15,"授权公告日":15}
+    results_conversion = {"tile":2,"地址":3,"分类号":4,"申请号":5,"申请人":9,"专利权人":9,"发明人":10,"设计人":10,"申请日":12,"abstract":13,"申请公布日":15,"授权公告日":15}
     
     patent_class = 'publish'
     # patent_class = 'authorization'
+    # patent_class = 'utility_model'
+    # patent_class = 'design'
 
     excelfile='C:\\Files\\Documents\\apollo项目组\\国防科工局成果转化目录\\专利信息爬取_' + patent_class + '.xlsx'
     pklfile_2 = 'results\\' + patent_class + '\\' + patent_class + '_2.pkl'
@@ -20,7 +22,7 @@ def main():
     # create a new excel file
     wb = openpyxl.Workbook()
     sheet = wb.get_sheet_by_name('Sheet')
-    column = ('序号','发明名称','地址','分类号','申请号','专利类型','技术领域','应用领域','申请人/专利权人','发明人','法律状态','申请日','摘要','转化方式','申请/授权公布日','解密公告日','发布时间','数据来源')
+    column = ('序号','发明名称','地址','分类号','申请号','专利类型','技术领域','应用领域','申请人/专利权人','发明人/设计人','法律状态','申请日','摘要/简要说明','转化方式','申请/授权公布日','解密公告日','发布时间','数据来源')
 
     boldFont = Font(bold=True)
     centerAlignment = Alignment(horizontal="center", vertical="center")

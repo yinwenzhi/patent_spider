@@ -23,8 +23,6 @@ def setLogging(log_dir, stdout_flag):
     else:
         logging.basicConfig(filename=log_fp, format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
-
-
 def initEnv(patent_class):
     cfgs_root = 'cfgs'
     cur_cfg = getConfig(cfgs_root, patent_class)
@@ -33,6 +31,10 @@ def initEnv(patent_class):
         cur_cfg['strSources'] = 'pip'
     elif patent_class == 'authorization':
         cur_cfg['strSources'] = 'pig'
+    elif patent_class == 'utility_model':
+        cur_cfg['strSources'] = 'pug'
+    elif patent_class == 'design':
+        cur_cfg['strSources'] = 'pdg'
 
     logs_dir = os.path.join(cur_cfg['logs'], patent_class)
 

@@ -49,12 +49,13 @@ def count(pklfile):
 def output_content(pklfile):
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
-    for result in results[6:7]:
+    for result in results:
         for num in range(1):
         # for num in range(result['page_size']):
-            print(result['company'])
-            print(result['page_size'])
-            print(result['patent'][num+1])
+            if result['page_size'] != 0:
+                print(result['company'])
+                print(result['page_size'])
+                print(result['patent'][num+1])
 
 # 切分pklfile为三等份
 def split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
@@ -88,8 +89,10 @@ def concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
 
 def main():
     excelfile='C:\\Files\\Documents\\apollo项目组\\国防科工局成果转化目录\\海淀区的企业名称.xlsx'
-    patent_class = 'publish'
+    # patent_class = 'publish'
     # patent_class = 'authorization'
+    # patent_class = 'utility_model'
+    patent_class = 'design'
 
     pklfile = 'results\\' + patent_class + '\\' + patent_class + '.pkl'
     pklfile_1 = 'results\\' + patent_class + '\\' + patent_class + '_1.pkl'
@@ -102,10 +105,10 @@ def main():
     pklfile_filter_3 = 'results\\' + patent_class + '\\' + patent_class + '_filter_3.pkl'
 
     # create a new pkl file
-    # wb = xlrd.open_workbook(excelfile)
-    # sheet = wb.sheet_by_name('Sheet1')
-    # companys = sheet.col_values(0)[1:8672]
-    # new_companys_pkl(pklfile, companys)
+    wb = xlrd.open_workbook(excelfile)
+    sheet = wb.sheet_by_name('Sheet1')
+    companys = sheet.col_values(0)[1:8672]
+    new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
     # count(pklfile)
@@ -113,7 +116,7 @@ def main():
     # count(pklfile_2)
     # count(pklfile_3)
 
-    output_content(pklfile_2)
+    # output_content(pklfile_2)
 
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
