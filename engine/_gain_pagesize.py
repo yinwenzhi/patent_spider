@@ -8,6 +8,7 @@ from . import engine
 import random
 import requests
 from utils.time_conversion import secondstohour, countlasttime
+from utils.change_color import red, green, yellow
 
 class GainPageSize(engine.SpiderEngine):
     def __init__(self, config):
@@ -71,12 +72,12 @@ class GainPageSize(engine.SpiderEngine):
                     self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
                 except :
                     if soup.find("h1", class_="head_title") == None:
-                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果: {company} {ip['http']}")
+                        log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果, {company} {ip['http']}")
                         ipNeedChange = False
                         flag+=1
                         if flag >= self.trytimes:
                             self.spider_all+=1
-                            log.info(f' # {idx+1}-{pagenow}-{flag}: {company} failed\n')
+                            log.info(' # {}-{}-{}: {} {}\n'.format(idx+1, pagenow, flag, company, red('failed')))
                             idx += 1
                             flag = 0
                             t2 = time.time()
@@ -89,23 +90,23 @@ class GainPageSize(engine.SpiderEngine):
                         ipNeedChange = True
                         continue
 
-                log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} success\n')
-                ipNeedChange = True
+                log.info(' # {}-{}-{}: {}, {} 保存到文件 {}\n'.format(idx+1, pagenow, flag+1, company, green('success'), ip['http']))
+
                 self.spider_success+=1
                 self.spider_all+=1
 
                 with open(self.pklfile, 'wb') as f:
                     pickle.dump(self.results, f)
-                log.info(f" # {idx+1}-{pagenow}-{flag+1}: 保存到文件")
 
                 t2 = time.time()
                 lasttime = countlasttime((t2-t1), self.spider_all, self.spider_hassuccessed, self.end-self.start)
                 log.info(f' # 耗时{secondstohour(t2-t1)}, 成功爬取了{self.spider_success}/{self.spider_all}家公司, 预计剩余{lasttime}\n')
 
+                ipNeedChange = True
                 idx += 1
                 flag = 0
             else:
-                log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} has successed\n')
+                log.info(' # {}-{}-{}: {} {}\n'.format(idx+1, pagenow, flag+1, company, yellow('has successed')))
                 idx += 1
                 flag = 0
 

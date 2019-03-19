@@ -8,6 +8,7 @@ from . import engine
 import random
 import reques
 from utils.time_conversion import secondstohour, countlasttimets
+from utils.change_color import red, green, yellow
 
 class GainContent(engine.SpiderEngine):
     def __init__(self, config):
@@ -79,7 +80,8 @@ class GainContent(engine.SpiderEngine):
                             flag += 1
                             if flag >= self.trytimes:
                                 self.spider_all+=1
-                                log.info(f' # {idx+1}-{pagenow}-{flag}: {company} failed')
+                                log.info(' # {}-{}-{}: {} {}\n'.format(idx+1, pagenow, flag, company, red('failed')))
+
                                 flag = 0
                                 t2 = time.time()
                                 lasttime = countlasttime((t2-t1), self.spider_all, self.spider_hassuccessed, self.pages_all)
@@ -93,22 +95,25 @@ class GainContent(engine.SpiderEngine):
                             log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")
                             ipNeedChange = True
                             continue
-                    log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} success\n')
-                    ipNeedChange = True
+                    log.info(' # {}-{}-{}: {}, {} 保存到文件 {}\n'.format(idx+1, pagenow, flag+1, company, green('success'), ip['http']))
+                    
                     self.spider_success += 1
                     self.spider_all += 1
+
                     with open(self.pklfile, 'wb') as f:
                         pickle.dump(self.results, f)
-                    log.info(f" # {idx+1}-{pagenow}-{flag+1}: 保存到文件")
+
                     t2 = time.time()
                     lasttime = countlasttime((t2-t1), self.spider_all, self.spider_hassuccessed, self.pages_all)
                     log.info(f' # 耗时{secondstohour(t2-t1)}, 成功爬取了{self.spider_success}/{self.spider_all}张页面, 预计剩余{lasttime}\n')
+
+                    ipNeedChange = True
                     flag = 0
                     if pagenow == page_size:
                         idx += 1
                         break
                 else:
-                    log.info(f' # {idx+1}-{pagenow}-{flag+1}: {company} has successed\n')
+                    log.info(' # {}-{}-{}: {} {}\n'.format(idx+1, pagenow, flag+1, company, yellow('has successed')))
                     flag = 0
                     if pagenow == page_size:
                         idx += 1
