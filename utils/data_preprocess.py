@@ -75,18 +75,15 @@ def split_pkl(pklfile, num=8):
         with open(pklfile_split, 'wb') as f:
             pickle.dump(results_split, f)
 
-# 合并三份pklfile为一
-def concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
+# 合并几份pklfile为一
+def concentrate_pkl(pklfile, num=8):
     results=[]
-    with open(pklfile_1, 'rb') as f:
-        results_1 = pickle.load(f)
-    with open(pklfile_2, 'rb') as f:
-        results_2 = pickle.load(f)
-    with open(pklfile_3, 'rb') as f:
-        results_3 = pickle.load(f)
-    results.extend(results_1)
-    results.extend(results_2)
-    results.extend(results_3)
+    for i in range(num):
+        pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
+        with open(pklfile_split, 'rb') as f:
+            results_split = pickle.load(f)
+        results.extend(results_split)
+
     with open(pklfile, 'wb') as f:
         pickle.dump(results, f)
 
@@ -98,14 +95,8 @@ def main():
     # patent_class = 'design'
 
     pklfile = 'results\\' + patent_class + '\\' + patent_class + '.pkl'
-    pklfile_1 = 'results\\' + patent_class + '\\' + patent_class + '_1.pkl'
-    pklfile_2 = 'results\\' + patent_class + '\\' + patent_class + '_2.pkl'
-    pklfile_3 = 'results\\' + patent_class + '\\' + patent_class + '_3.pkl'
 
     pklfile_filter = 'results\\' + patent_class + '\\' + patent_class + '_filter.pkl'
-    pklfile_filter_1 = 'results\\' + patent_class + '\\' + patent_class + '_filter_1.pkl'
-    pklfile_filter_2 = 'results\\' + patent_class + '\\' + patent_class + '_filter_2.pkl'
-    pklfile_filter_3 = 'results\\' + patent_class + '\\' + patent_class + '_filter_3.pkl'
 
     # # create a new pkl file
     # wb = xlrd.open_workbook(excelfile)
