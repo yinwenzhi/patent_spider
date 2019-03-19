@@ -2,6 +2,7 @@ import xlrd
 import pickle
 import os
 from tqdm import tqdm
+import math
 
 # 根据公司名列表初始化一个新的pklfile, 每个公司的第一个专利设置为空列表
 def new_companys_pkl(pklfile, companys):
@@ -57,8 +58,52 @@ def output_content(pklfile):
                 print(result['page_size'])
                 print(result['patent'][num+1])
 
-# 切分pklfile为若干等份
-def split_pkl(pklfile, num=8):
+# 对获取了pagesize的pklfile依据专利页数切分为若干等份
+def split_content_pkl(pklfile, num=8):
+    page_sizes = 0
+    with open(pklfile, 'rb') as f:
+        results = pickle.load(f)
+
+    for result in results:
+        page_size = result['page_size']
+        page_sizes += page_size
+
+    step = math.ceil(page_sizes / num)
+    # print(page_sizes,step)
+    # steps中存入切分节点
+    steps = [0]
+    _page_size = 0
+    i = 1
+    for idx, result in enumerate(results):
+        page_size = result['page_size']
+        _page_size += page_size
+        if _page_size > step * i:
+            i += 1
+            steps.append(idx+1)
+
+    # 开始依据steps进行切分
+    for i in range(num):
+        pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
+        start = steps[i]
+        if i != num-1:
+            end = steps[i+1]
+        else:
+            end = len(results)
+        results_split = results[start:end]
+
+        # 输出每段实际总页数
+        page_sizes = 0
+        for result in results_split:
+            page_size = result['page_size']
+            page_sizes += page_size
+        print(f"第{i}个pickle包含了{len(results_split)}家公司，{page_sizes}页专利信息")
+
+        # # 保存到文件
+        # with open(pklfile_split, 'wb') as f:
+        #     pickle.dump(results_split, f)
+
+# 切分原始的空pklfile为若干等份
+def split_empty_pkl(pklfile, num=8):
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
         step = len(results) // num
@@ -105,12 +150,12 @@ def main():
     # new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, num=8)
 
-    for i in range(8):
-        pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
-        count(pklfile_split)
+    # for i in range(8):
+    #     pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
+    #     count(pklfile_split)
 
     # output_content(pklfile)
-
+    split_content_pkl(pklfile)
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
 if __name__ == "__main__":
