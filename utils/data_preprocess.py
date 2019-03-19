@@ -36,27 +36,43 @@ def filter_companys_pkl(pklfile, pklfile_filter):
 # 计算pklfile文件中包含专利的公司数和页数
 def count(pklfile):
     company_num = 0
+    success_num = 0
     page_num = 0
+    latestsuccess = 0 
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
     for result in results:
+        
+        company_num += 1
         if result['page_size'] != 0:
-            company_num += 1
+            success_num += 1
             page_num += result['page_size']
-    print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
-
+            latestsuccess =company_num
+            print("第%d家公司"%success_num,result['company'])
+    #print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
+    print('共有{}/{}家公司存在专利, 共有{}页专利信息,平均每家公司有{}页专利'.format(success_num,company_num,page_num,(page_num/success_num)))
+    print('最后一个成功的公司{}',format(latestsuccess))
 # 输出pklfile文件中的专利内容
 def output_content(pklfile):
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
+    i = 0 
     for result in results:
-        for num in range(1):
+        # for num in range(1):
         # for num in range(result['page_size']):
-            if result['page_size'] != 0:
-                print(result['company'])
-                print(result['page_size'])
-                print(result['patent'][num+1])
+        if result['page_size'] != 0:
+            i+=1
 
+            #totalpage + = result['page_size']
+            # try:
+            #     #print("第%d家公司"%i)
+            #     #print("第%d家公司"%i,result['company'])
+            #     # print(result['page_size'])
+            #     # print(result['patent'][num+1])
+                
+            # except :
+            #     pass
+        print("第%d家公司"%i)
 # 切分pklfile为三等份
 def split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
     with open(pklfile, 'rb') as f:
@@ -89,10 +105,10 @@ def concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
 
 def main():
     excelfile='C:\\Files\\Documents\\apollo项目组\\国防科工局成果转化目录\\海淀区的企业名称.xlsx'
-    # patent_class = 'publish'
+    patent_class = 'publish'
     # patent_class = 'authorization'
     # patent_class = 'utility_model'
-    patent_class = 'design'
+    #patent_class = 'design'
 
     pklfile = 'results\\' + patent_class + '\\' + patent_class + '.pkl'
     pklfile_1 = 'results\\' + patent_class + '\\' + patent_class + '_1.pkl'
@@ -105,18 +121,20 @@ def main():
     pklfile_filter_3 = 'results\\' + patent_class + '\\' + patent_class + '_filter_3.pkl'
 
     # create a new pkl file
-    wb = xlrd.open_workbook(excelfile)
-    sheet = wb.sheet_by_name('Sheet1')
-    companys = sheet.col_values(0)[1:8672]
-    new_companys_pkl(pklfile, companys)
+    # wb = xlrd.open_workbook(excelfile)
+    # sheet = wb.sheet_by_name('Sheet1')
+    # companys = sheet.col_values(0)[1:8672]
+    # new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
+    output_content(pklfile_2)
+
     # count(pklfile)
-    # count(pklfile_1)
+    count(pklfile_1)
     # count(pklfile_2)
     # count(pklfile_3)
 
-    # output_content(pklfile_2)
+    
 
     # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
