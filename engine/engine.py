@@ -82,7 +82,7 @@ class SpiderEngine(ABC):
         title = cp_box.h1.text.split("\xa0")[1]
         li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
                 cp_box.find_all('li') if e.text.strip() != '' and len(' '.join(e.text.split()).split("：")) >= 2}
-        li_list['tile']= title
+        li_list['title']= title
         abstract =cp_box.find("div", class_="cp_jsh").find_all('span')[1].text
         li_list['abstract'] = abstract
         return li_list

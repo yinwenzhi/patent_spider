@@ -48,31 +48,34 @@ def count(pklfile):
             success_num += 1
             page_num += result['page_size']
             latestsuccess =company_num
-            print("第%d家公司"%success_num,result['company'])
+            print(result['page_size'])
+            print("成功的第%d家公司"%success_num,result['company'])
     #print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
     print('共有{}/{}家公司存在专利, 共有{}页专利信息,平均每家公司有{}页专利'.format(success_num,company_num,page_num,(page_num/success_num)))
     print('最后一个成功的公司{}',format(latestsuccess))
 # 输出pklfile文件中的专利内容
 def output_content(pklfile):
+    company_num = 0
+    success_num = 0
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
-    i = 0 
+    
     for result in results:
         # for num in range(1):
         # for num in range(result['page_size']):
         if result['page_size'] != 0:
-            i+=1
-
+            success_num += 1
+            print("成功的第%d家公司：%s" %(success_num ,result['company']))
             #totalpage + = result['page_size']
             # try:
             #     #print("第%d家公司"%i)
             #     #print("第%d家公司"%i,result['company'])
             #     # print(result['page_size'])
             #     # print(result['patent'][num+1])
-                
+            print(result['page_size'])    
             # except :
             #     pass
-        print("第%d家公司"%i)
+        
 # 切分pklfile为三等份
 def split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
     with open(pklfile, 'rb') as f:
@@ -127,10 +130,10 @@ def main():
     # new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
 
-    output_content(pklfile_2)
+    output_content(pklfile_1)
 
     # count(pklfile)
-    count(pklfile_1)
+    #count(pklfile_1)
     # count(pklfile_2)
     # count(pklfile_3)
 
