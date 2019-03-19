@@ -1,5 +1,6 @@
 # Folders
 .vscode
+/results
 
 # pkl
 *.xls

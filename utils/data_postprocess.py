@@ -5,7 +5,7 @@ from tqdm import tqdm
 from openpyxl.styles import Font, Alignment
 
 def main():
-    results_conversion = {"tile":2,"地址":3,"分类号":4,"申请号":5,"申请人":9,"专利权人":9,"发明人":10,"设计人":10,"申请日":12,"abstract":13,"申请公布日":15,"授权公告日":15}
+    results_conversion = {"title":2,"地址":3,"分类号":4,"申请号":5,"申请人":9,"专利权人":9,"发明人":10,"设计人":10,"申请日":12,"abstract":13,"申请公布日":15,"授权公告日":15}
     
     patent_class = 'publish'
     # patent_class = 'authorization'
