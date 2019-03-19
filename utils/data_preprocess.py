@@ -34,17 +34,33 @@ def filter_companys_pkl(pklfile, pklfile_filter):
     with open(pklfile_filter, 'wb') as f:
         pickle.dump(results, f)
 
-# 计算pklfile文件中包含专利的公司数和页数
+# 计算单个pklfile文件中包含专利的公司数和页数
 def count(pklfile):
     company_num = 0
     page_num = 0
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
     for result in results:
-        if result['page_size'] != 0:
+        page_size = result['page_size']
+        company = result['company']
+        if page_size != 0:
             company_num += 1
             page_num += result['page_size']
+        # if page_size > 3000:
+        #     print(f'{company}共有{page_size}页专利')
     print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
+    return company_num, page_num
+
+# 计算多个pklfile文件中包含专利的公司数和页数
+def count_all(pklfile, num=8):
+    company_all = 0
+    page_all = 0
+    for i in range(num):
+        pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
+        company_num, page_num = count(pklfile_split)
+        company_all += company_num
+        page_all += page_num
+    print(f'共有{company_all}家公司，{page_all}页专利')
 
 # 输出pklfile文件中的专利内容
 def output_content(pklfile):
@@ -69,6 +85,7 @@ def split_content_pkl(pklfile, num=8):
         page_sizes += page_size
 
     step = math.ceil(page_sizes / num)
+    print(f"共有{page_sizes}页专利，{num}等份step选取为{step}")
     # print(page_sizes,step)
     # steps中存入切分节点
     steps = [0]
@@ -150,13 +167,12 @@ def main():
     # new_companys_pkl(pklfile, companys)
     # split_pkl(pklfile, num=8)
 
-    # for i in range(8):
-    #     pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
-    #     count(pklfile_split)
+    # concentrate_pkl(pklfile)
+    # count(pklfile)
+    count_all(pklfile, num=8)
 
     # output_content(pklfile)
-    split_content_pkl(pklfile)
-    # concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3)
+    # split_content_pkl(pklfile)
 
 if __name__ == "__main__":
     main()

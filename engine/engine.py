@@ -75,6 +75,9 @@ class SpiderEngine(ABC):
         except requests.exceptions.TooManyRedirects as e:
             log.error(f"# {idx+1}-{flag+1}: e")
             return False
+        except requests.exceptions.InvalidURL as e:
+            log.error(f"# {idx+1}-{flag+1}: e")
+            return False
         return html
 
     def prase_cp_box(self, cp_box):
