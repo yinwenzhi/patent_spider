@@ -31,7 +31,7 @@ class SpiderEngine(ABC):
         for each in ip_list:
             yield {"http": each}
 
-    def get_html(self, applicant, ip=None, strSources='pip', pageNow=1):
+    def get_html(self, idx, flag, applicant, ip=None, strSources='pip', pagenow=1):
         url = self.url
         timeout = self.timeout
 
@@ -42,11 +42,11 @@ class SpiderEngine(ABC):
         form_data = {"showType": 1,
                      "strSources": strSources,
                      "strWhere": "PA='%{}%'".format(applicant),
-                     "numSortMethod": 4,
+                     "numSortMethod": "",
                      "strLicenseCode": "",
-                     "numIp": 0,
+                     "numIp": "",
                      "numIpc": "",
-                     "numIg": 0,
+                     "numIg": "",
                      "numIgc": "",
                      "numIgd": "",
                      "numUg": "",
@@ -55,14 +55,52 @@ class SpiderEngine(ABC):
                      "numDg": "",
                      "numDgc": "",
                      "pageSize": 3,
-                     "pageNow": pageNow}
-
-        html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
+                     "pageNow": pagenow}
+        try:
+            html = requests.post(url=url, data=form_data, headers=headers, proxies=ip, timeout=timeout)
+        except requests.exceptions.ProxyError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: 连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败")
+            return False
+        except requests.exceptions.ReadTimeout as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: ReadTimeout({self.timeout})")
+            return False
+        except requests.exceptions.ConnectionError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection aborted")
+            return False
+        except requests.exceptions.ChunkedEncodingError as e:
+            log.error(f"# {idx+1}-{pagenow}-{flag+1}: Connection broken: IncompleteRead")
+            return False
+        except requests.exceptions.ContentDecodingError as e:
+            log.error(f"# {idx+1}-{flag+1}: Received response with content-encoding: gzip, but failed to decode it.")
+            return False
+        except requests.exceptions.TooManyRedirects as e:
+            log.error(f"# {idx+1}-{flag+1}: e")
+            return False
         return html
+
+    def prase_cp_box(self, cp_box):
+        # print("**********************")
+        title = cp_box.h1.text.split("\xa0")[1]
+        li_list = {' '.join(e.text.split()).split("：")[0]: ' '.join(e.text.split()).split("：")[1] for e in
+                cp_box.find_all('li') if e.text.strip() != '' and len(' '.join(e.text.split()).split("：")) >= 2}
+        li_list['tile']= title
+        abstract =cp_box.find("div", class_="cp_jsh").find_all('span')[1].text
+        li_list['abstract'] = abstract
+        return li_list
+
+    def prase_page_cp_boxes(self, soup):
+        cp_boxes_text = soup.findAll("div", class_="cp_box")
+        result_page_contents = []
+        for cp_box in cp_boxes_text:
+            #print(cp_box)
+            result_content = self.prase_cp_box(cp_box)
+            # print(result_content)
+            result_page_contents.append(result_content)
+        return result_page_contents
 
     @abstractmethod
     def start_spider(self):
-        """ 
+        """
         This function start running the spider.
         """
         pass

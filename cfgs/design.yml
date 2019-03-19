@@ -1,0 +1,19 @@
+results: "results"
+logs: "logs"
+
+stdout: True
+timeout: 60
+trytimes: 2
+
+start: 0
+end: ~
+
+url: "http://epub.sipo.gov.cn/patentoutline.action"
+
+# ip_url: 'http://api3.xiguadaili.com/ip/?tid=556604581095711&num=1000&sortby=time'
+ip_url: "http://api3.xiguadaili.com/ip/?tid=556604581095711&num=1000&delay=5&category=2"
+
+# pklfile: 'results\\design\\design.pkl'
+# pklfile: 'results\\design\\design_1.pkl'
+pklfile: 'results\\design\\design_2.pkl'
+# pklfile: 'results\\design\\design_3.pkl'
