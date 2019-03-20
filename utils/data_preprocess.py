@@ -51,8 +51,9 @@ def count(pklfile):
             print(result['page_size'])
             print("成功的第%d家公司"%success_num,result['company'])
     #print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
-    print('共有{}/{}家公司存在专利, 共有{}页专利信息,平均每家公司有{}页专利'.format(success_num,company_num,page_num,(page_num/success_num)))
-    print('最后一个成功的公司{}',format(latestsuccess))
+    #print('共有{}/{}家公司存在专利, 共有{}页专利信息,平均每家公司有{}页专利'.format(success_num,company_num,page_num,(page_num/success_num)))
+    #print('最后一个成功的公司{}',format(latestsuccess))
+    print('有{}家公司：',format(company_num))
 # 输出pklfile文件中的专利内容
 def output_content(pklfile):
     company_num = 0
@@ -98,25 +99,21 @@ def split_pkl(pklfile, num=8):
         with open(pklfile_split, 'wb') as f:
             pickle.dump(results_split, f)
 
-# 合并三份pklfile为一
-def concentrate_pkl(pklfile, pklfile_1, pklfile_2, pklfile_3):
+# 合并多份pklfile为一
+def concentrate_pkl(pklfile,num ):
     results=[]
-    with open(pklfile_1, 'rb') as f:
-        results_1 = pickle.load(f)
-    with open(pklfile_2, 'rb') as f:
-        results_2 = pickle.load(f)
-    with open(pklfile_3, 'rb') as f:
-        results_3 = pickle.load(f)
-    results.extend(results_1)
-    results.extend(results_2)
-    results.extend(results_3)
-    with open(pklfile, 'wb') as f:
-        pickle.dump(results, f)
+    for i in num:
+        
+        with open(pklfile_, 'rb') as f:
+            results_1 = pickle.load(f)
+        results.extend(results_1)
+        with open(pklfile, 'wb') as f:
+            pickle.dump(results, f)
 
 def main():
     excelfile='C:\\Files\\Documents\\apollo项目组\\国防科工局成果转化目录\\海淀区的企业名称.xlsx'
-    patent_class = 'publish'
-    # patent_class = 'authorization'
+    #patent_class = 'publish'
+    patent_class = 'authorization'
     # patent_class = 'utility_model'
     # patent_class = 'design'
 
@@ -145,7 +142,7 @@ def main():
     # count(pklfile_3)
 
     
-    # split_pkl(pklfile, num=8)
+    split_pkl(pklfile, num=8)
 
     for i in range(8):
         pklfile_split = pklfile.split('.')[0] + '_' + str(i) + '.pkl'
