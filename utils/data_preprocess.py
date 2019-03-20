@@ -39,6 +39,7 @@ def filter_companys_pkl(pklfile):
 def count(pklfile):
     company_num = 0
     page_num = 0
+    spider_page_num = 0
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
     for result in results:
@@ -46,12 +47,15 @@ def count(pklfile):
         company = result['company']
         if page_size != 0:
             company_num += 1
-            page_num += result['page_size']
+        page_num += result['page_size']
+        for i in range(2,page_size+1):
+            if result['patent'][i] != []:
+                spider_page_num += 1
         # else:
         #     print(company)
         # if page_size > 3000:
         #     print(f'{company}共有{page_size}页专利')
-    print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息')
+    print(f'共有{company_num}/{len(results)}家公司存在专利, 共有{page_num}页专利信息, 已经爬取了{spider_page_num}页')
     return company_num, page_num
 
 # 计算多个pklfile文件中包含专利的公司数和页数
@@ -70,6 +74,7 @@ def output_content(pklfile):
     with open(pklfile, 'rb') as f:
         results = pickle.load(f)
     for result in results:
+    # for result in results[0:1]:
         for num in range(1):
         # for num in range(result['page_size']):
             if result['page_size'] != 0:
@@ -180,7 +185,8 @@ def main():
     pklfile_step1 = 'results\\' + patent_class + '\\' + patent_class + '_step1.pkl'
 
     pklfile = 'results\\' + patent_class + '\\' + patent_class + '.pkl'
-    pklfile_7 = 'results\\' + patent_class + '\\' + patent_class + '_7.pkl'
+    pklfile_0 = 'results\\' + patent_class + '\\' + patent_class + '_0.pkl'
+    pklfile_1 = 'results\\' + patent_class + '\\' + patent_class + '_1.pkl'
 
     pklfile_filter = 'results\\' + patent_class + '\\' + patent_class + '_filter.pkl'
 
@@ -203,9 +209,9 @@ def main():
     # count_all(pklfile, num=8)
     # concentrate_pkl(pklfile, num=8)
     # filter_companys_pkl(pklfile)
-    split_content_pkl(pklfile, num=8)
+    # split_content_pkl(pklfile, num=8)
 
-    # output_content(pklfile)
+    output_content(pklfile_0)
     
 if __name__ == "__main__":
     main()

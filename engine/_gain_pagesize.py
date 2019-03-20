@@ -87,6 +87,7 @@ class GainPageSize(engine.SpiderEngine):
                         continue
                     else:
                         log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")
+                        flag = 0
                         ipNeedChange = True
                         continue
 

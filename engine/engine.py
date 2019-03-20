@@ -98,6 +98,7 @@ class SpiderEngine(ABC):
             result_content = self.prase_cp_box(cp_box)
             # print(result_content)
             result_page_contents.append(result_content)
+        a = result_page_contents[0]  # 可以引发错误，以防写入空内容
         return result_page_contents
 
     @abstractmethod
