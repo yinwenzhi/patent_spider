@@ -6,8 +6,8 @@ import sys
 import logging as log
 from . import engine
 import random
-import reques
-from utils.time_conversion import secondstohour, countlasttimets
+import requests
+from utils.time_conversion import secondstohour, countlasttime
 from utils.change_color import red, green, yellow
 
 class GainContent(engine.SpiderEngine):
@@ -47,12 +47,12 @@ class GainContent(engine.SpiderEngine):
             if page_size == 1:
                 idx += 1
                 continue
-            for pagenow in range(2, page_size+1):
+            pagenow = 2
+            while pagenow <= page_size:
                 if self.results[idx]['patent'][pagenow] == []:
                     if ipNeedChange:
                         try:
                             ip = next(ip_gene)
-                            # print(ip)
                             log.info(f" # {idx+1}-{pagenow}-{flag+1}: 提取IP成功: {ip['http']}")
                         except:
                             log.error(f"# {idx+1}-{pagenow}-{flag+1}: 提取IP失败")
@@ -72,7 +72,8 @@ class GainContent(engine.SpiderEngine):
                     soup = BeautifulSoup(html.text, 'lxml')
                     # print(soup)
                     try:
-                        self.results[idx]['patent'][1] = self.prase_page_cp_boxes(soup)
+                        result_page_contents = self.prase_page_cp_boxes(soup)
+                        self.results[idx]['patent'][pagenow] = result_page_contents
                     except:
                         if soup.find("h1", class_="head_title") == None:
                             log.error(f"# {idx+1}-{pagenow}-{flag+1}: 没有您要查询的结果")
@@ -90,9 +91,11 @@ class GainContent(engine.SpiderEngine):
                                 if pagenow == page_size:
                                     idx += 1
                                     break
+                                pagenow += 1
                             continue
                         else:
                             log.error(f"# {idx+1}-{pagenow}-{flag+1}: 被认为是机器人")
+                            flag = 0
                             ipNeedChange = True
                             continue
                     log.info(' # {}-{}-{}: {}, {} 保存到文件 {}\n'.format(idx+1, pagenow, flag+1, company, green('success'), ip['http']))
@@ -112,11 +115,13 @@ class GainContent(engine.SpiderEngine):
                     if pagenow == page_size:
                         idx += 1
                         break
+                    pagenow += 1
                 else:
                     log.info(' # {}-{}-{}: {} {}\n'.format(idx+1, pagenow, flag+1, company, yellow('has successed')))
                     flag = 0
                     if pagenow == page_size:
                         idx += 1
                         break
+                    pagenow += 1
 
 
