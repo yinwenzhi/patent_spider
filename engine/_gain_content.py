@@ -6,8 +6,8 @@ import sys
 import logging as log
 from . import engine
 import random
-import reques
-from utils.time_conversion import secondstohour, countlasttimets
+import requests
+from utils.time_conversion import secondstohour, countlasttime
 from utils.change_color import red, green, yellow
 
 class GainContent(engine.SpiderEngine):
